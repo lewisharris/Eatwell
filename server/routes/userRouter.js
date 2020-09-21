@@ -69,7 +69,7 @@ router.post("/login", async (req, res) => {
     const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET);
     res.json({
       token,
-      user: { id: user._id, username: user.username, email: user.email }
+      user: { id: user._id, username: user.username }
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -77,12 +77,39 @@ router.post("/login", async (req, res) => {
 });
 
 //delete account route
-router.delete("/delete", auth, async (res, req) => {
+router.delete("/delete", auth, async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.user);
     console.log(deletedUser);
     res.json(deletedUser);
   } catch (err) {}
+});
+
+//verify token route
+router.post("/tokenisvalid", async (req, res) => {
+  try {
+    const token = req.header("x-auth-token");
+    if (!token) {
+      return res.json(false);
+    }
+    const verified = JWT.verify(token, process.env.JWT_SECRET);
+    if (!verified) {
+      return res.json(false);
+    }
+    const user = await User.findById(verified.id);
+    if (!user) {
+      return res.json(false);
+    }
+    return res.json(true);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//get logged in user route
+router.get("/", auth, async (req, res) => {
+  const user = await User.findById(req.user); // find user
+  res.json({ username: user.username, id: user._id });
 });
 
 module.exports = router;
