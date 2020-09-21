@@ -78,7 +78,11 @@ router.post("/login", async (req, res) => {
 
 //delete account route
 router.delete("/delete", auth, async (res, req) => {
-  console.log(req.user);
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.user);
+    console.log(deletedUser);
+    res.json(deletedUser);
+  } catch (err) {}
 });
 
 module.exports = router;

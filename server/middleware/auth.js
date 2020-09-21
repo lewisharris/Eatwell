@@ -1,8 +1,9 @@
-const JWT = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
   try {
-    const token = req.header("x-auth-token"); // get x-auth-token from front end in header
+    const token = req.header("x-auth-token");
+    console.log(token); // get x-auth-token from front end in header
     //validation
     // if no token present - 401 (unauthorised)
     if (!token) {
@@ -10,7 +11,7 @@ const auth = (req, res, next) => {
         .status(401)
         .json({ message: "No auth token, authorisation denied" });
     }
-    const verified = JWT.verify(token, process.env.JWT_SECRET);
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
     if (!verified) {
       return res
         .status(401)
