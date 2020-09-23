@@ -18,7 +18,7 @@ export default function AuthButtons() {
   const logout = e => {
     e.preventDefault();
     setUserData({ token: undefined, user: undefined });
-    localStorage.setItem(("auth-token": ""));
+    localStorage.setItem("auth-token", "");
   };
   return (
     <nav>
