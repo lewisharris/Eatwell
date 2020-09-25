@@ -41,7 +41,7 @@ router.post("/register", async (req, res) => {
     const savedUser = await newUser.save();
     res.json(savedUser);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.msg });
   }
 });
 
@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
       user: { id: user._id, username: user.username }
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.msg });
   }
 });
 
@@ -102,7 +102,7 @@ router.post("/tokenisvalid", async (req, res) => {
     }
     return res.json(true);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.msg });
   }
 });
 
