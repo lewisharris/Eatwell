@@ -39,7 +39,7 @@ export default function Register() {
       history.push("/");
     } catch (err) {
       if (err.response.data.msg) {
-        setError(err.response.data.msg);
+        setError(err.response.data.msggit);
       }
     }
   };
@@ -55,14 +55,14 @@ export default function Register() {
       />
       <form>
         <label htmlFor="register-email">
-          Email(this will be your username)
+          Email(this will be your username)*
         </label>
         <input
           id="register-email"
           type="email"
           onChange={e => setEmail(e.target.value)}
         />
-        <label htmlFor="register-password">Password</label>
+        <label htmlFor="register-password">Password*</label>
         <input
           onChange={e => setPassword(e.target.value)}
           id="register-password"
@@ -71,7 +71,7 @@ export default function Register() {
         <input
           onChange={e => setPasswordCheck(e.target.value)}
           id="register-verify-password"
-          placeholder="verify password"
+          placeholder="verify password*"
           type="text"
         />
         <label htmlFor="register-name">Name</label>
