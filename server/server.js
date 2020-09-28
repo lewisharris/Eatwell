@@ -26,6 +26,7 @@ app.use(cors()); //allow cors
 app.use(express.json()); //allow json parsing
 //routes
 app.use("/users", require("./routes/userRouter"));
+app.use("/list", require("./routes/ListRouter"));
 
 app.listen(port, () => {
   // listen on port for server
