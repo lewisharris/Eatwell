@@ -39,7 +39,7 @@ export default function Register() {
       history.push("/");
     } catch (err) {
       if (err.response.data.msg) {
-        setError(err.response.data.msggit);
+        setError(err.response.data.msg);
       }
     }
   };
