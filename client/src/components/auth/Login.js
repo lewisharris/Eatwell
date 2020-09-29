@@ -21,10 +21,7 @@ export default function Login() {
       };
       const loginResponse = await axios.post(
         "http://localhost:5000/users/login",
-        {
-          email,
-          password
-        }
+        loginUser
       );
       setUserData({
         token: loginResponse.data.token,

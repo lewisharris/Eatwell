@@ -6,10 +6,10 @@ import ErrorNotice from "../misc/ErrorNotice";
 
 export default function RecordFood() {
   const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+  const [mealType, setMealType] = useState("breakfast");
   const [calories, setCalories] = useState();
   const [error, setError] = useState();
-
+  const { userData } = useContext(UserContext);
   const history = useHistory();
 
   const submitForm = async e => {
@@ -17,18 +17,12 @@ export default function RecordFood() {
     try {
       const newFood = {
         title,
-        description,
+        mealType,
         calories
       };
-      await axios.post("http://localhost:5000/list", newFood);
-      const dataResponse = await axios.post(
-        "http://localhost:5000/users/list",
-        {
-          title,
-          description,
-          calories
-        }
-      );
+      await axios.post("http://localhost:5000/list", newFood, {
+        headers: { "x-auth-token": userData.token }
+      });
       history.push("/");
     } catch (err) {
       if (err.response.data.msg) {
@@ -53,12 +47,18 @@ export default function RecordFood() {
           type="text"
           onChange={e => setTitle(e.target.value)}
         />
-        <label htmlFor="food-description">Description*</label>
-        <input
-          onChange={e => setDescription(e.target.value)}
-          id="food-description"
-          type="text"
-        />
+        <label htmlFor="meal-type">Meal Type</label>
+
+        <select
+          value={mealType}
+          id="meal-type"
+          onChange={e => setMealType(e.target.value)}
+        >
+          <option value="breakfasr">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Snack</option>
+        </select>
         <label htmlFor="food-calories">Calories*</label>
         <input
           id="food-calories"
