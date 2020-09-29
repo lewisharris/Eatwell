@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
-const ListItemSchema = new mongoose.Schema({
+const MealSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
+  calories: { type: String, required: true },
   userId: { type: String, required: true }
 });
 
-module.exports = Item = mongoose.model("item", ListItemSchema);
+module.exports = Meal = mongoose.model("Meal", MealSchema);

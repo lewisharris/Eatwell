@@ -54,9 +54,7 @@ export default function Register() {
         }}
       />
       <form>
-        <label htmlFor="register-email">
-          Email(this will be your username)*
-        </label>
+        <label htmlFor="register-email">Email*</label>
         <input
           id="register-email"
           type="email"
@@ -74,7 +72,7 @@ export default function Register() {
           placeholder="verify password*"
           type="text"
         />
-        <label htmlFor="register-name">Name</label>
+        <label htmlFor="register-name">username*</label>
         <input
           id="register-name"
           type="text"
