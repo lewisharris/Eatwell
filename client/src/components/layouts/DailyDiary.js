@@ -25,7 +25,11 @@ export default function DailyDiary() {
         {foodData.length === 0 ? (
           <li key={0}>No Entries</li>
         ) : (
-          foodData.map(item => <li key={item._id}>{item.title}</li>)
+          foodData.map(item => (
+            <li key={item._id}>
+              {item.title} <button>X</button>
+            </li>
+          ))
         )}
       </ul>
     </div>
