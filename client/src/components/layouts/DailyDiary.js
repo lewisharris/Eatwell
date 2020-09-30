@@ -1,37 +1,102 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import UserContext from "../../context/UserContext";
+import Table from "./Table";
+import React, { Component } from "react";
 
-export default function DailyDiary() {
-  const [foodData, setFoodData] = useState([]);
-  const { userData } = useContext(UserContext);
+export default class DailyDiary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataList: [],
+      breakfast: [],
+      lunch: [],
+      dinner: [],
+      snack: []
+    };
+  }
+  componentDidMount() {
+    const { data } = this.props;
+    this.setState({ dataList: data });
+  }
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+    if (data !== prevProps.data) {
+      this.setState({ dataList: data });
+    }
+  }
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/list/all", {
-        headers: { "x-auth-token": userData.token }
-      })
-      .then(res => {
-        setFoodData(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [userData]);
-
-  return (
-    <div>
-      <ul>
-        {foodData.length === 0 ? (
-          <li key={0}>No Entries</li>
-        ) : (
-          foodData.map(item => (
-            <li key={item._id}>
-              {item.title} <button>X</button>
-            </li>
-          ))
-        )}
-      </ul>
-    </div>
-  );
+  render() {
+    const { dataList } = this.state;
+    return (
+      <div>
+        <h4>Breakfast</h4>
+        {this.state.breakfast}
+        <ul>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "breakfast";
+                })
+                .map(entry => {
+                  return (
+                    <li key={entry._id}>
+                      {" "}
+                      {entry.title} {entry.calories}Kcal
+                    </li>
+                  );
+                })
+            : null}
+        </ul>
+        <h4>Lunch</h4>
+        <ul>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "lunch";
+                })
+                .map(entry => {
+                  return (
+                    <li key={entry._id}>
+                      {" "}
+                      {entry.title} {entry.calories}Kcal
+                    </li>
+                  );
+                })
+            : null}
+        </ul>
+        <h4>Dinner</h4>
+        <ul>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "dinner";
+                })
+                .map(entry => {
+                  return (
+                    <li key={entry._id}>
+                      {" "}
+                      {entry.title} {entry.calories}Kcal
+                    </li>
+                  );
+                })
+            : null}
+        </ul>
+        <h4>Snacks</h4>
+        <ul>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "snack";
+                })
+                .map(entry => {
+                  return (
+                    <li key={entry._id}>
+                      {" "}
+                      {entry.title} {entry.calories}Kcal
+                    </li>
+                  );
+                })
+            : null}
+        </ul>
+      </div>
+    );
+  }
 }

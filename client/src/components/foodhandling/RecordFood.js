@@ -4,11 +4,12 @@ import axios from "axios";
 import UserContext from "../../context/UserContext";
 import ErrorNotice from "../misc/ErrorNotice";
 
-export default function RecordFood() {
+export default function RecordFood(props) {
   const [title, setTitle] = useState();
   const [mealType, setMealType] = useState("breakfast");
   const [calories, setCalories] = useState();
   const [error, setError] = useState();
+
   const { userData } = useContext(UserContext);
   const history = useHistory();
 
@@ -20,9 +21,13 @@ export default function RecordFood() {
         mealType,
         calories
       };
-      await axios.post("http://localhost:5000/list", newFood, {
-        headers: { "x-auth-token": userData.token }
-      });
+      await axios
+        .post("http://localhost:5000/list", newFood, {
+          headers: { "x-auth-token": userData.token }
+        })
+        .then(() => {
+          props.getFood();
+        });
       history.push("/");
     } catch (err) {
       if (err.response.data.msg) {
