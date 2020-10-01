@@ -7,8 +7,9 @@ const Container = styled.div``;
 export default function ErrorNotice(props) {
   return (
     <Container className="error-notice">
-      <span>{props.message}</span>
-      <button onClick={props.clearError}>X</button>
+      <button onClick={props.clearError}>
+        <span>{props.message}</span>
+      </button>
     </Container>
   );
 }
