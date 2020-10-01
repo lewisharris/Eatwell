@@ -1,15 +1,13 @@
 import React from "react";
-import styled from "styled-components";
-
-const Container = styled.div``;
+import { Typography } from "@material-ui/core";
 
 //fix bug, component must show nothing when error is cleared
 export default function ErrorNotice(props) {
   return (
-    <Container className="error-notice">
+    <Typography variant="body2" color="error">
       <button onClick={props.clearError}>
         <span>{props.message}</span>
       </button>
-    </Container>
+    </Typography>
   );
 }

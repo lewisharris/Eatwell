@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
+import UserSettings from "./components/pages/UserSettings";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Header from "./components/layouts/Header";
 import "./App.css";
 import axios from "axios";
 import UserContext from "./context/userContext";
-import { Container } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core";
+import theme from "./theme/theme";
+import RecordFood from "./components/foodhandling/RecordFood";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -43,16 +46,18 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <UserContext.Provider value={{ userData, setUserData }}>
-          <Container maxWidth="md">
+        <ThemeProvider theme={theme}>
+          <UserContext.Provider value={{ userData, setUserData }}>
             <Header />
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/userSettings" component={UserSettings} />
+              <Route path="/newentry" component={RecordFood} />
             </Switch>
-          </Container>
-        </UserContext.Provider>
+          </UserContext.Provider>
+        </ThemeProvider>
       </BrowserRouter>
     </>
   );

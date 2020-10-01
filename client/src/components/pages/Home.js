@@ -4,6 +4,8 @@ import UserContext from "../../context/userContext";
 import { useHistory } from "react-router-dom";
 import RecordFood from "../foodhandling/RecordFood";
 import DailyDiary from "../layouts/DailyDiary";
+import AppNav from "../layouts/AppNav";
+import { Typography } from "@material-ui/core/";
 
 export default function Home() {
   const { userData } = useContext(UserContext);
@@ -54,9 +56,11 @@ export default function Home() {
 
   return (
     <div>
-      Hi {name}, lets see how your meal tracking is going today
-      <RecordFood getFood={getFood} />
+      <Typography variant="body1">
+        Hi {name}, lets see how your meal tracking is going today
+      </Typography>
       <DailyDiary data={listData} delete={removeFood} />
+      <AppNav />
     </div>
   );
 }

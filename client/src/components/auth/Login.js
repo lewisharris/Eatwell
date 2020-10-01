@@ -3,6 +3,27 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import ErrorNotice from "../misc/ErrorNotice";
+import {
+  Button,
+  TextField,
+  Grid,
+  Paper,
+  makeStyles,
+  Typography
+} from "@material-ui/core";
+import LockIcon from "@material-ui/icons/Lock";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    margin: "20px auto",
+    padding: theme.spacing(5),
+    textAlign: "left",
+    color: theme.palette.text.secondary
+  }
+}));
 
 export default function Login() {
   const [email, setEmail] = useState();
@@ -11,6 +32,8 @@ export default function Login() {
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
+
+  const classes = useStyles();
 
   const submitForm = async e => {
     try {
@@ -37,29 +60,50 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <ErrorNotice
-        message={error}
-        clearError={() => {
-          setError(undefined);
-        }}
-      />
-      <h2>Log in</h2>
-      <form onSubmit={submitForm}>
-        <label htmlFor="login-email">Email</label>
-        <input
-          id="login-email"
-          type="email"
-          onChange={e => setEmail(e.target.value)}
-        />
-        <label htmlFor="login-password">Password</label>
-        <input
-          onChange={e => setPassword(e.target.value)}
-          id="login-password"
-          type="text"
-        />
-        <input id="submit" type="submit" value="login" />
-      </form>
-    </div>
+    <form onSubmit={submitForm}>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
+        <LockIcon fontSize="large" color="secondary" />
+        <Paper className={classes.paper}>
+          <ErrorNotice
+            message={error}
+            clearError={() => {
+              setError(undefined);
+            }}
+          />
+          <Typography variant="h6">Log in</Typography>
+          <Grid item>
+            <TextField
+              label="Email"
+              id="login-email"
+              type="email"
+              onChange={e => setEmail(e.target.value)}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              label="Password"
+              onChange={e => setPassword(e.target.value)}
+              id="login-password"
+              type="text"
+            />
+          </Grid>
+        </Paper>
+        <Button
+          id="submit"
+          type="submit"
+          value="login"
+          color="primary"
+          variant="outlined"
+        >
+          Log in
+        </Button>
+      </Grid>
+    </form>
   );
 }

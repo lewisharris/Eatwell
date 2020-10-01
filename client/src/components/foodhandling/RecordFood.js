@@ -1,17 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import ErrorNotice from "../misc/ErrorNotice";
+import AppNav from "../layouts/AppNav";
 
 export default function RecordFood(props) {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
   const [mealType, setMealType] = useState("breakfast");
-  const [calories, setCalories] = useState();
-  const [error, setError] = useState();
+  const [calories, setCalories] = useState("");
+  const [error, setError] = useState("");
 
   const { userData } = useContext(UserContext);
   const history = useHistory();
+
+  useEffect(() => {
+    if (!userData.user) {
+      history.push("/login");
+      return;
+    }
+  });
 
   const submitForm = async e => {
     e.preventDefault();
@@ -21,7 +29,7 @@ export default function RecordFood(props) {
         mealType,
         calories
       };
-      setMealType("");
+      setMealType("breakfast");
       setCalories("");
       setError("");
       await axios
@@ -29,7 +37,6 @@ export default function RecordFood(props) {
           headers: { "x-auth-token": userData.token }
         })
         .then(() => {
-          props.getFood();
           history.push("/");
         });
     } catch (err) {
@@ -62,7 +69,7 @@ export default function RecordFood(props) {
           id="meal-type"
           onChange={e => setMealType(e.target.value)}
         >
-          <option value="breakfasr">Breakfast</option>
+          <option value="breakfast">Breakfast</option>
           <option value="lunch">Lunch</option>
           <option value="dinner">Dinner</option>
           <option value="snack">Snack</option>
@@ -75,6 +82,7 @@ export default function RecordFood(props) {
         />
         <input id="submit" type="submit" />
       </form>
+      <AppNav />
     </div>
   );
 }
