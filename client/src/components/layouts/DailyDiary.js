@@ -27,75 +27,84 @@ export default class DailyDiary extends Component {
     const { dataList } = this.state;
     return (
       <div>
+        <table>
+          <tbody>
+            <td>Food</td>
+            <td>Calories</td>
+            <td>Remove</td>
+          </tbody>
+        </table>
+
         <h4>Breakfast</h4>
         {this.state.breakfast}
-        <ul>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "breakfast";
-                })
-                .map(entry => {
-                  return (
-                    <li key={entry._id}>
-                      {" "}
-                      {entry.title} {entry.calories}Kcal
-                    </li>
-                  );
-                })
-            : null}
-        </ul>
+        {dataList
+          ? dataList
+              .filter(entry => {
+                return entry.mealType === "breakfast";
+              })
+              .map(entry => {
+                return (
+                  <Table
+                    key={entry._id}
+                    data={entry}
+                    delete={this.props.delete}
+                  />
+                );
+              })
+          : null}
+        <p>Total: </p>
         <h4>Lunch</h4>
-        <ul>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "lunch";
-                })
-                .map(entry => {
-                  return (
-                    <li key={entry._id}>
-                      {" "}
-                      {entry.title} {entry.calories}Kcal
-                    </li>
-                  );
-                })
-            : null}
-        </ul>
+        {dataList
+          ? dataList
+              .filter(entry => {
+                return entry.mealType === "lunch";
+              })
+              .map(entry => {
+                return (
+                  <Table
+                    key={entry._id}
+                    data={entry}
+                    delete={this.props.delete}
+                  />
+                );
+              })
+          : null}
+        <p>Total: </p>
         <h4>Dinner</h4>
-        <ul>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "dinner";
-                })
-                .map(entry => {
-                  return (
-                    <li key={entry._id}>
-                      {" "}
-                      {entry.title} {entry.calories}Kcal
-                    </li>
-                  );
-                })
-            : null}
-        </ul>
+        {dataList
+          ? dataList
+              .filter(entry => {
+                return entry.mealType === "dinner";
+              })
+              .map(entry => {
+                return (
+                  <Table
+                    key={entry._id}
+                    data={entry}
+                    delete={this.props.delete}
+                  />
+                );
+              })
+          : null}
+        <p>Total: </p>
         <h4>Snacks</h4>
-        <ul>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "snack";
-                })
-                .map(entry => {
-                  return (
-                    <li key={entry._id}>
-                      {" "}
-                      {entry.title} {entry.calories}Kcal
-                    </li>
-                  );
-                })
-            : null}
-        </ul>
+
+        {dataList
+          ? dataList
+              .filter(entry => {
+                return entry.mealType === "snack";
+              })
+              .map(entry => {
+                return (
+                  <Table
+                    key={entry._id}
+                    data={entry}
+                    delete={this.props.delete}
+                  />
+                );
+              })
+          : null}
+        <p>Total: </p>
       </div>
     );
   }

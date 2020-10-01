@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../context/userContext";
 import ErrorNotice from "../misc/ErrorNotice";
 
 export default function RecordFood(props) {
@@ -21,14 +21,17 @@ export default function RecordFood(props) {
         mealType,
         calories
       };
+      setMealType("");
+      setCalories("");
+      setError("");
       await axios
         .post("http://localhost:5000/list", newFood, {
           headers: { "x-auth-token": userData.token }
         })
         .then(() => {
           props.getFood();
+          history.push("/");
         });
-      history.push("/");
     } catch (err) {
       if (err.response.data.msg) {
         setError(err.response.data.msg);

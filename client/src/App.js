@@ -7,7 +7,8 @@ import Register from "./components/auth/Register";
 import Header from "./components/layouts/Header";
 import "./App.css";
 import axios from "axios";
-import UserContext from "./context/UserContext";
+import UserContext from "./context/userContext";
+import { Container } from "@material-ui/core";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -43,12 +44,14 @@ function App() {
     <>
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
-          <Header />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </Switch>
+          <Container maxWidth="md">
+            <Header />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+            </Switch>
+          </Container>
         </UserContext.Provider>
       </BrowserRouter>
     </>

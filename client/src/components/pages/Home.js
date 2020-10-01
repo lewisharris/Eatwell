@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../context/userContext";
 import { useHistory } from "react-router-dom";
 import RecordFood from "../foodhandling/RecordFood";
 import DailyDiary from "../layouts/DailyDiary";
@@ -30,6 +30,19 @@ export default function Home() {
       });
   }
 
+  async function removeFood(id) {
+    await axios
+      .delete(`http://localhost:5000/list/${id}`, {
+        headers: { "x-auth-token": userData.token }
+      })
+      .then(() => {
+        getFood();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
     if (!userData.user) {
       history.push("/login");
@@ -43,7 +56,7 @@ export default function Home() {
     <div>
       Hi {name}, lets see how your meal tracking is going today
       <RecordFood getFood={getFood} />
-      <DailyDiary data={listData} />
+      <DailyDiary data={listData} delete={removeFood} />
     </div>
   );
 }

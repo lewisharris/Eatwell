@@ -41,15 +41,19 @@ router.get("/all", auth, async (req, res) => {
   console.log(foods);
 });
 
-// delete items from list with user id
+// delete items from list with item id
 router.delete("/:id", auth, async (req, res) => {
-  const food = await Meal.findOne({ userId: req.user, _id: req.params.id });
-  if (!food)
-    return res.status(400).json({
-      msg: "No food found with this ID that belongs to the current user."
-    });
-  const deletedFood = await food.findByIdAndDelete(req.params.id);
-  res.json(deletedFood);
+  try {
+    const food = await Meal.findOne({ userId: req.user, _id: req.params.id });
+    if (!food)
+      return res.status(400).json({
+        msg: "No food found with this ID that belongs to the current user."
+      });
+    const deletedFood = await Meal.findByIdAndDelete(req.params.id);
+    res.json(deletedFood);
+  } catch (err) {
+    res.status(500).json({ error: err.msg });
+  }
 });
 
 module.exports = router;

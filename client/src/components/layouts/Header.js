@@ -4,11 +4,11 @@ import AuthButtons from "../auth/AuthButtons";
 
 export default function Header() {
   return (
-    <div>
+    <>
       <Link to="/">
-        <h1>ToDoApp</h1>
+        <h1>Calorie Counter</h1>
         <AuthButtons />
       </Link>
-    </div>
+    </>
   );
 }
