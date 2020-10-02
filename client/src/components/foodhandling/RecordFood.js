@@ -1,10 +1,26 @@
 import React, { useState, useContext, useEffect } from "react";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import ErrorNotice from "../misc/ErrorNotice";
 import AppNav from "../layouts/AppNav";
+import Form from "../reusablecomponents/Form";
+import H3 from "../reusablecomponents/H3";
+import FastfoodIcon from "@material-ui/icons/Fastfood";
+import { Button, TextField } from "@material-ui/core";
 
+//Component Styling
+const RecordFoodPage = styled.div`
+  background: ${props => props.theme.primary};
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+`;
+
+//Component
 export default function RecordFood(props) {
   const [title, setTitle] = useState("");
   const [mealType, setMealType] = useState("breakfast");
@@ -47,18 +63,13 @@ export default function RecordFood(props) {
   };
 
   return (
-    <div onSubmit={submitForm}>
-      <h2>Log new meal</h2>
-      <ErrorNotice
-        message={error}
-        clearError={() => {
-          setError(undefined);
-        }}
-      />
-      <form>
+    <RecordFoodPage>
+      <Form onSubmit={submitForm}>
+        <FastfoodIcon fontSize="large" color="secondary" />
+        <H3>Log New Meal</H3>
         <label htmlFor="food-title">Meal/Food*</label>
-        <input
-          id="food-title"
+        <TextField
+          label="Meal/Food*"
           type="text"
           onChange={e => setTitle(e.target.value)}
         />
@@ -74,15 +85,22 @@ export default function RecordFood(props) {
           <option value="dinner">Dinner</option>
           <option value="snack">Snack</option>
         </select>
-        <label htmlFor="food-calories">Calories*</label>
-        <input
-          id="food-calories"
+        <TextField
+          label="Calories*"
           type="text"
           onChange={e => setCalories(e.target.value)}
         />
-        <input id="submit" type="submit" />
-      </form>
+        <Button type="submit" color="secondary" variant="outlined">
+          Add
+        </Button>
+        <ErrorNotice
+          message={error}
+          clearError={() => {
+            setError(undefined);
+          }}
+        />
+      </Form>
       <AppNav />
-    </div>
+    </RecordFoodPage>
   );
 }

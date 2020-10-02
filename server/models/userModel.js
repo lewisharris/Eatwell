@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   height: { type: String, required: false },
   weight: { type: String, required: false },
-  maxCalories: { type: String, required: false }
+  targetCalories: { type: String, required: false }
 });
 
 module.exports = User = mongoose.model("user", userSchema);

@@ -65,13 +65,6 @@ export default function AppNav() {
     history.push("/");
   };
 
-  const logout = e => {
-    e.preventDefault();
-    setUserData({ token: undefined, user: undefined });
-    localStorage.setItem("auth-token", "");
-    history.push("/");
-  };
-
   return (
     <React.Fragment>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
@@ -107,9 +100,6 @@ export default function AppNav() {
           <div className={classes.grow} />
           <IconButton color="inherit">
             <SearchIcon />
-          </IconButton>
-          <IconButton edge="end" color="inherit" onClick={logout}>
-            <MoreIcon />
           </IconButton>
         </Toolbar>
       </AppBar>

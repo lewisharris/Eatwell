@@ -1,24 +1,33 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/userContext";
-import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Typography, Button, Toolbar } from "@material-ui/core/";
+import styled from "styled-components";
+import { Button } from "@material-ui/core/";
 
+//Component styling
+const Logo = styled.h1`
+  position: absolute;
+  top: 50%;
+  left: 3vw;
+  transform: translateY(-50%);
+`;
+const Header = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 10vw;
+  width: 100vw;
+  height: 60px;
+  background: ${props => props.theme.primary};
+`;
+
+//Component
 export default function AuthButtons() {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-
-  const useStyles = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.paper,
-      padding: 0
-    },
-    title: {
-      flexGrow: 1
-    },
-    AppBar: { padding: 0 }
-  }));
 
   const register = e => {
     e.preventDefault();
@@ -28,26 +37,15 @@ export default function AuthButtons() {
     e.preventDefault();
     history.push("/login");
   };
-  const classes = useStyles();
 
   return (
     <>
       {userData.user ? null : (
-        <AppBar position="static" className={classes.AppBar}>
-          <Toolbar>
-            <Typography
-              variant="h6"
-              className={classes.title}
-              label="EatWell"
-            />
-            <Button color="inherit" onClick={register}>
-              Register
-            </Button>
-            <Button color="inherit" onClick={login}>
-              Log In
-            </Button>
-          </Toolbar>
-        </AppBar>
+        <Header>
+          <Logo>EatWell</Logo>
+          <Button onClick={register}>Register</Button>
+          <Button onClick={login}>Log In</Button>
+        </Header>
       )}
     </>
   );

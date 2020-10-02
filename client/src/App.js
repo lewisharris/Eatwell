@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ThemeProvider } from "styled-components";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
@@ -9,7 +10,6 @@ import Header from "./components/layouts/Header";
 import "./App.css";
 import axios from "axios";
 import UserContext from "./context/userContext";
-import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme/theme";
 import RecordFood from "./components/foodhandling/RecordFood";
 

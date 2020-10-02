@@ -1,13 +1,18 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import styled from "styled-components";
 
-//fix bug, component must show nothing when error is cleared
+const ErrorMessage = styled.button`
+  background: ${props => props.theme.error};
+  color: ${props => props.theme.textPrimary};
+  box-sizing: border-box;
+  border-radius: 2px;
+  margin: 10px 0px;
+`;
+
 export default function ErrorNotice(props) {
   return (
-    <Typography variant="body2" color="error">
-      <button onClick={props.clearError}>
-        <span>{props.message}</span>
-      </button>
-    </Typography>
+    <ErrorMessage onClick={props.clearError}>
+      <span>{props.message}</span>
+    </ErrorMessage>
   );
 }

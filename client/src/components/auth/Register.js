@@ -3,27 +3,10 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import ErrorNotice from "../misc/ErrorNotice";
-import {
-  Button,
-  TextField,
-  Grid,
-  Paper,
-  makeStyles,
-  Typography
-} from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    margin: "20px auto",
-    padding: theme.spacing(5),
-    textAlign: "left",
-    color: theme.palette.text.secondary
-  }
-}));
+import Form from "../reusablecomponents/Form";
+import H3 from "../reusablecomponents/H3";
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -34,8 +17,6 @@ export default function Register() {
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
-
-  const classes = useStyles();
 
   const submitForm = async e => {
     e.preventDefault();
@@ -68,63 +49,42 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={submitForm}>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-      >
-        <LockIcon fontSize="large" color="secondary" />
-        <Paper className={classes.paper}>
-          <Typography variant="h6">Sign Up</Typography>
-          <ErrorNotice
-            message={error}
-            clearError={() => {
-              setError(undefined);
-            }}
-          />
-          <Grid item>
-            <TextField
-              label="Email"
-              type="email"
-              onChange={e => setEmail(e.target.value)}
-            />
-          </Grid>
+    <Form onSubmit={submitForm}>
+      <LockIcon fontSize="large" color="secondary" />
+      <H3>Sign Up</H3>
 
-          <Grid item>
-            <TextField
-              label="Password*"
-              onChange={e => setPassword(e.target.value)}
-              type="password"
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              label="Verify Password*"
-              onChange={e => setPasswordCheck(e.target.value)}
-              placeholder="verify password*"
-              type="password"
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              label="Username"
-              type="text"
-              onChange={e => setName(e.target.value)}
-            />
-          </Grid>
-        </Paper>
-        <Button
-          type="submit"
-          color="primary"
-          variant="outlined"
-          value="register"
-        >
-          Register
-        </Button>
-      </Grid>
-    </form>
+      <TextField
+        label="Email"
+        type="email"
+        onChange={e => setEmail(e.target.value)}
+      />
+
+      <TextField
+        label="Password*"
+        onChange={e => setPassword(e.target.value)}
+        type="password"
+      />
+
+      <TextField
+        label="Verify Password*"
+        onChange={e => setPasswordCheck(e.target.value)}
+        placeholder="verify password*"
+        type="password"
+      />
+      <TextField
+        label="Username"
+        type="text"
+        onChange={e => setName(e.target.value)}
+      />
+      <Button type="submit" color="primary" variant="outlined" value="register">
+        Register
+      </Button>
+      <ErrorNotice
+        message={error}
+        clearError={() => {
+          setError(undefined);
+        }}
+      />
+    </Form>
   );
 }

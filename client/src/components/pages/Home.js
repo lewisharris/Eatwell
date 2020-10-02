@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import { useHistory } from "react-router-dom";
-import RecordFood from "../foodhandling/RecordFood";
+import CalorieStats from "../layouts/CalorieStats";
 import DailyDiary from "../layouts/DailyDiary";
 import AppNav from "../layouts/AppNav";
 import { Typography } from "@material-ui/core/";
@@ -56,6 +56,7 @@ export default function Home() {
 
   return (
     <div>
+      <CalorieStats />
       <Typography variant="body1">
         Hi {name}, lets see how your meal tracking is going today
       </Typography>

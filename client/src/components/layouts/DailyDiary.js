@@ -1,8 +1,8 @@
 import Chart from "./Chart";
 import React, { Component } from "react";
+import styled from "styled-components";
 import {
   Table,
-  Container,
   TableBody,
   TableCell,
   TableContainer,
@@ -11,6 +11,14 @@ import {
   Paper,
   Typography
 } from "@material-ui/core/";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 60px auto 0px auto;
+  max-width: 1000px;
+`;
 
 export default class DailyDiary extends Component {
   constructor(props) {
@@ -40,13 +48,13 @@ export default class DailyDiary extends Component {
       <Container>
         <TableContainer component={Paper}>
           <Table size="small" aria-label="a dense table">
-            <TableHead>
+            <TableBody>
               <TableRow>
                 <TableCell align="right">Food</TableCell>
                 <TableCell align="right">Calories</TableCell>
                 <TableCell align="right">Remove</TableCell>
               </TableRow>
-            </TableHead>
+            </TableBody>
           </Table>
         </TableContainer>
 

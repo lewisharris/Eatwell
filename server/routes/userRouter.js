@@ -112,4 +112,27 @@ router.get("/", auth, async (req, res) => {
   res.json({ username: user.username, id: user._id });
 });
 
+//get logged in user route
+router.get("/user/:id", auth, async (req, res) => {
+  const user = await User.findById(req.params.id); // find user
+  res.json(user);
+});
+
+//update user route
+router.post("/update/:id", auth, async (req, res) => {
+  User.findById(req.params.id).then(user => {
+    user.username = req.body.username;
+    user.height = req.body.height;
+    user.weight = req.body.weight;
+    user.targetCalories = req.body.targetCalories;
+
+    user
+      .save()
+      .then(() => {
+        res.json({ msg: "user updated" });
+      })
+      .catch(err => res.status(500).json({ msg: err.msg }));
+  });
+});
+
 module.exports = router;
