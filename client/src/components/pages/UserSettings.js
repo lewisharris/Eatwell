@@ -19,10 +19,11 @@ const UserSettingsPage = styled.div`
 
 export default function UserSettings() {
   const { userData, setUserData } = useContext(UserContext);
-  const [username, setUsername] = useState("");
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
-  const [targetCalories, setTargetCalories] = useState("");
+  const [username, setUsername] = useState("lewis");
+  const [height, setHeight] = useState("190");
+  const [weight, setWeight] = useState("30");
+  const [targetCalories, setTargetCalories] = useState("1000");
+
   const goHome = e => {
     e.preventDefault();
     history.push("/");
@@ -33,30 +34,8 @@ export default function UserSettings() {
       history.push("/login");
       return;
     }
-  }, [userData]);
-
-  const updateDetails = async e => {
-    e.preventDefault();
-    const userID = userData.user.id;
-    const update = {
-      username,
-      height,
-      weight,
-      targetCalories
-    };
-    const sendData = await axios
-      .post(`http://localhost:5000/users/update/${userID}`, update, {
-        headers: { "x-auth-token": userData.token }
-      })
-      .catch(err => console.log(err));
-
-    const recieveData = await axios
-      .get(`http://localhost:5000/users/user/${userID}`, {
-        headers: { "x-auth-token": userData.token }
-      })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  };
+  });
+  const updateDetails = () => {};
 
   const history = useHistory();
 
