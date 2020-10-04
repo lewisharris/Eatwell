@@ -9,3 +9,5 @@ const auth = require("../middleware/auth");
 // create user details if none exist
 
 // update user details if they exist
+
+module.exports = router;
