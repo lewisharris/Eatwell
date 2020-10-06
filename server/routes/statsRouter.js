@@ -16,49 +16,26 @@ router.get("/:id", auth, async (req, res) => {
 });
 
 // create user details
-router.get("/update/:id", auth, async (req, res) => {
+router.post("/update/:id", auth, async (req, res) => {
   try {
-    const stats = await UserStats.findOne({ userId: req.params.id }).then(
-      () => {
-        console.log(stats);
-        //   const { userId, height, weight, targetCalories } = req.body;
-        //   stats.userId = userId;
-        //   stats.height = height;
-        //   stats.weight = weight;
-        //   stats.targetCalories = targetCalories;
-
-        //   user
-        //     .save()
-        //     .then(() => {
-        //       res.json({ msg: "user updated" });
-        //     })
-        //     .catch(err => res.status(500).json({ msg: err.msg }));
-      }
-    );
+    await UserStats.findOneAndUpdate(
+      { userId: req.params.id },
+      {
+        userId: req.params.id,
+        height: req.body.height,
+        $push: { weight: req.body.weight },
+        targetCalories: req.body.targetCalories
+      },
+      { new: true, upsert: true, useFindAndModify: false }
+    )
+      .then(res => {
+        console.log(res);
+      })
+      .then(res.json("updated"))
+      .catch(err => console.log(err));
   } catch (err) {
     res.status(500).json({ msg: err.msg });
   }
 });
-
-// router.delete("/:id", auth, async (req, res) => {
-//     try {
-//       if (!food)
-//         return res.status(400).json({
-//           msg: "No food found with this ID that belongs to the current user."
-//         });
-//       const deletedFood = await Meal.findByIdAndDelete(req.params.id);
-//       res.json(deletedFood);
-//     } catch (err) {
-//       res.status(500).json({ error: err.msg });
-//     }
-//   });
-
-// var query = {'username': req.user.username};
-// req.newData.username = req.user.username;
-
-// MyModel.findOneAndUpdate(query, req.newData, {upsert: true}, function(err, doc) {
-//     if (err) return res.send(500, {error: err});
-//     return res.send('Succesfully saved.');
-// });
 
 module.exports = router;
