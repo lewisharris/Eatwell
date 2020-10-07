@@ -5,16 +5,8 @@ import styled from "styled-components";
 import { Button } from "@material-ui/core/";
 
 //Component styling
-const Logo = styled.h1`
-  position: absolute;
-  top: 50%;
-  left: 3vw;
-  transform: translateY(-50%);
-`;
+
 const Header = styled.div`
-  position: absolute;
-  top: 0px;
-  left: 0px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -22,6 +14,15 @@ const Header = styled.div`
   width: 100vw;
   height: 60px;
   background: ${props => props.theme.primary};
+`;
+const Logo = styled.h1`
+  padding: 0px;
+  margin: 0px;
+  height: 60px;
+  line-height: 60px;
+  position: absolute;
+  top: 0px;
+  left: 5vw;
 `;
 
 //Component
@@ -38,13 +39,27 @@ export default function AuthButtons() {
     history.push("/login");
   };
 
+  const logout = e => {
+    e.preventDefault();
+    setUserData({ token: undefined, user: undefined });
+    localStorage.setItem("auth-token", "");
+    history.push("/");
+  };
+
   return (
     <>
-      {userData.user ? null : (
+      {userData.user ? (
         <Header>
           <Logo>EatWell</Logo>
-          <Button onClick={register}>Register</Button>
-          <Button onClick={login}>Log In</Button>
+          <button onClick={logout} type="body1" edge="end" color="inherit">
+            Log out
+          </button>
+        </Header>
+      ) : (
+        <Header>
+          <Logo>EatWell</Logo>
+          <button onClick={register}>Register</button>
+          <button onClick={login}>Log In</button>
         </Header>
       )}
     </>

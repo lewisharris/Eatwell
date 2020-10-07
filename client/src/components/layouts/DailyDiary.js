@@ -1,4 +1,4 @@
-import Chart from "./Chart";
+import Entry from "./Entry";
 import React, { Component } from "react";
 import styled from "styled-components";
 import {
@@ -31,6 +31,30 @@ export default class DailyDiary extends Component {
       snack: []
     };
   }
+
+  renderTotal = list => {
+    console.log(list);
+    if (list.length === 0) {
+      return "0";
+    } else {
+      list
+        .map(entry => {
+          return entry.calories;
+        })
+        .reduce((a, b) => {
+          return a + b;
+        });
+    }
+  };
+
+  sortList = (data, filterVal) => {
+    const list = data.filter(entry => {
+      return entry.mealType === filterVal;
+    });
+  };
+
+  renderList = () => {};
+
   componentDidMount() {
     const { data } = this.props;
     this.setState({ dataList: data });
@@ -40,10 +64,12 @@ export default class DailyDiary extends Component {
     if (data !== prevProps.data) {
       this.setState({ dataList: data });
     }
+    this.sortList(this.state.dataList, "breakfast");
   }
 
   render() {
     const { dataList } = this.state;
+
     return (
       <Container>
         <TableContainer component={Paper}>
@@ -62,7 +88,6 @@ export default class DailyDiary extends Component {
         <TableContainer component={Paper}>
           <Table size="small" aria-label="a dense table">
             <TableBody>
-              {this.state.breakfast}
               {dataList
                 ? dataList
                     .filter(entry => {
@@ -70,7 +95,7 @@ export default class DailyDiary extends Component {
                     })
                     .map(entry => {
                       return (
-                        <Chart
+                        <Entry
                           key={entry._id}
                           data={entry}
                           delete={this.props.delete}
@@ -81,7 +106,7 @@ export default class DailyDiary extends Component {
             </TableBody>
           </Table>
         </TableContainer>
-        <p>Total: </p>
+        <p>Total:</p>
 
         <Typography variant="h6">Lunch</Typography>
         <TableContainer component={Paper}>
@@ -94,7 +119,7 @@ export default class DailyDiary extends Component {
                     })
                     .map(entry => {
                       return (
-                        <Chart
+                        <Entry
                           key={entry._id}
                           data={entry}
                           delete={this.props.delete}
@@ -118,7 +143,7 @@ export default class DailyDiary extends Component {
                     })
                     .map(entry => {
                       return (
-                        <Chart
+                        <Entry
                           key={entry._id}
                           data={entry}
                           delete={this.props.delete}
@@ -141,7 +166,7 @@ export default class DailyDiary extends Component {
                     })
                     .map(entry => {
                       return (
-                        <Chart
+                        <Entry
                           key={entry._id}
                           data={entry}
                           delete={this.props.delete}

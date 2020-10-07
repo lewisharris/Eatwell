@@ -10,6 +10,7 @@ import { Typography } from "@material-ui/core/";
 export default function Home() {
   const { userData } = useContext(UserContext);
   const [listData, setListData] = useState([]);
+  const [targetCal, setTargetCal] = useState([]);
 
   const [name, setName] = useState();
   const history = useHistory();
@@ -45,6 +46,16 @@ export default function Home() {
       });
   }
 
+  const setTargetCalories = async () => {
+    axios
+      .get(`http://localhost:5000/stats/${userData.id}`, {
+        headers: { "x-auth-token": userData.token }
+      })
+      .then(res => {
+        setTargetCal(res.data[0].targetCalories);
+      });
+  };
+
   useEffect(() => {
     if (!userData.user) {
       history.push("/login");
@@ -52,11 +63,12 @@ export default function Home() {
     }
     getFood();
     getUsername();
+    setTargetCalories();
   }, [userData]);
 
   return (
     <div>
-      <CalorieStats />
+      <CalorieStats targetCal={targetCal} data={listData} />
       <Typography variant="body1">
         Hi {name}, lets see how your meal tracking is going today
       </Typography>

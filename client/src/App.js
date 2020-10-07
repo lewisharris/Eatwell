@@ -53,7 +53,11 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/userSettings" component={UserSettings} />
+              <Route
+                path="/userSettings"
+                component={UserSettings}
+                userData={userData}
+              />
               <Route path="/newentry" component={RecordFood} />
             </Switch>
           </UserContext.Provider>

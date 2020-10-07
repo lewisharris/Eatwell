@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     top: "auto",
-    bottom: 0
+    bottom: 0,
+    background: "#151515"
   },
   grow: {
     flexGrow: 1
@@ -67,7 +68,7 @@ export default function AppNav() {
 
   return (
     <React.Fragment>
-      <AppBar position="fixed" color="primary" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
             edge="start"

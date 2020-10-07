@@ -15,8 +15,10 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-// create user details
-router.post("/update/:id", auth, async (req, res) => {
+// add new use
+
+// update user details
+router.put("/update/:id", auth, async (req, res) => {
   try {
     await UserStats.findOneAndUpdate(
       { userId: req.params.id },

@@ -1,8 +1,8 @@
 const theme = {
-  primary: "#4351AF",
-  secondary: "#1A345A",
+  primary: "#151515",
+  secondary: "#42d7f5",
   textPrimary: "white",
-  textSecondary: "black",
+  textSecondary: "gray",
   icon: "#D12E54",
   error: "#DC143C"
 };
