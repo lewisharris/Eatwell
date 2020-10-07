@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import WelcomeMessage from "./WelcomeMessage";
 
 const Stats = styled.h1`
   display: flex;
@@ -65,6 +66,7 @@ export default function CalorieStats(props) {
           </P>
         </Stats>
       </Container>
+      <WelcomeMessage name={props.name} leftCal={leftCal} />
     </>
   );
 }

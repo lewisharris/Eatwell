@@ -43,6 +43,7 @@ export default function UserSettings(props) {
     }
   }, [stats]);
 
+  //get initial data from databse for user stats
   const getUserStats = () => {
     const userId = userData.user.id;
     axios
@@ -55,6 +56,25 @@ export default function UserSettings(props) {
 
   const submitForm = e => {
     e.preventDefault();
+    const userId = userData.user.id;
+    const userStats = {
+      height,
+      weight,
+      calories
+    };
+    axios
+      .put(
+        `http://localhost:5000/stats/update/${userId}`,
+        {
+          height: userStats.height,
+          weight: userStats.weight,
+          targetCalories: userStats.calories
+        },
+        { headers: { "x-auth-token": userData.token } }
+      )
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    history.push("/");
   };
 
   return (
@@ -62,24 +82,6 @@ export default function UserSettings(props) {
       <Form
         onSubmit={e => {
           submitForm(e);
-          const userId = userData.user.id;
-          const userStats = {
-            height,
-            weight,
-            calories
-          };
-          axios
-            .put(
-              `http://localhost:5000/stats/update/${userId}`,
-              {
-                height: userStats.height,
-                weight: userStats.weight,
-                targetCalories: userStats.calories
-              },
-              { headers: { "x-auth-token": userData.token } }
-            )
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
         }}
       >
         <H3>Update Details</H3>

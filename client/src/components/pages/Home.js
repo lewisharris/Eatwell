@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import CalorieStats from "../layouts/CalorieStats";
 import DailyDiary from "../layouts/DailyDiary";
 import AppNav from "../layouts/AppNav";
-import { Typography } from "@material-ui/core/";
+import WelcomeMessage from "../layouts/WelcomeMessage";
 
 export default function Home() {
   const { userData } = useContext(UserContext);
@@ -64,14 +64,12 @@ export default function Home() {
     getFood();
     getUsername();
     setTargetCalories();
-  }, [userData]);
+  }, [userData, history, getFood, getUsername, setTargetCalories]);
 
   return (
     <div>
-      <CalorieStats targetCal={targetCal} data={listData} />
-      <Typography variant="body1">
-        Hi {name}, lets see how your meal tracking is going today
-      </Typography>
+      <CalorieStats targetCal={targetCal} data={listData} name={name} />
+
       <DailyDiary data={listData} delete={removeFood} />
       <AppNav />
     </div>

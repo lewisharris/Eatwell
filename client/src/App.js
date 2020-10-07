@@ -12,6 +12,7 @@ import axios from "axios";
 import UserContext from "./context/userContext";
 import theme from "./theme/theme";
 import RecordFood from "./components/foodhandling/RecordFood";
+import SearchFood from "./components/pages/SearchFood";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -53,11 +54,8 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route
-                path="/userSettings"
-                component={UserSettings}
-                userData={userData}
-              />
+              <Route path="/userSettings" component={UserSettings} />
+              <Route path="/searchFood" component={SearchFood} />
               <Route path="/newentry" component={RecordFood} />
             </Switch>
           </UserContext.Provider>

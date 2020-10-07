@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/userContext";
 import styled from "styled-components";
-import { Button } from "@material-ui/core/";
+import AssessmentIcon from "@material-ui/icons/Assessment";
 
 //Component styling
 
@@ -51,6 +51,7 @@ export default function AuthButtons() {
       {userData.user ? (
         <Header>
           <Logo>EatWell</Logo>
+          <AssessmentIcon />
           <button onClick={logout} type="body1" edge="end" color="inherit">
             Log out
           </button>

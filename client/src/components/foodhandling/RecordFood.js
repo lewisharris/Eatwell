@@ -23,7 +23,7 @@ const RecordFoodPage = styled.div`
 //Component
 export default function RecordFood(props) {
   const [title, setTitle] = useState("");
-  const [mealType, setMealType] = useState("breakfast");
+
   const [calories, setCalories] = useState("");
   const [error, setError] = useState("");
 
@@ -36,6 +36,23 @@ export default function RecordFood(props) {
       return;
     }
   });
+
+  const calculateTime = () => {
+    const time = new Date();
+    const hour = time.getHours();
+
+    if (hour > 4 && hour < 11) {
+      return "breakfast";
+    } else if (hour >= 11 && hour < 16) {
+      return "lunch";
+    } else if (hour >= 16 && hour < 23) {
+      return "dinner";
+    } else {
+      return "snack";
+    }
+  };
+
+  const [mealType, setMealType] = useState(calculateTime);
 
   const submitForm = async e => {
     e.preventDefault();

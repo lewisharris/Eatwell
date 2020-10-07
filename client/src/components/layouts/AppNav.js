@@ -8,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Fab from "@material-ui/core/Fab";
 import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
-import MoreIcon from "@material-ui/icons/MoreVert";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -46,12 +45,16 @@ const useStyles = makeStyles(theme => ({
 export default function AppNav() {
   const history = useHistory();
   const classes = useStyles();
-  const { userData, setUserData } = useContext(UserContext);
   const path = window.location.pathname;
 
   const userSettings = e => {
     e.preventDefault();
     history.push("/userSettings");
+  };
+
+  const searchFood = e => {
+    e.preventDefault();
+    history.push("/searchFood");
   };
 
   const newEntry = e => {
@@ -99,7 +102,7 @@ export default function AppNav() {
           )}
 
           <div className={classes.grow} />
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={searchFood}>
             <SearchIcon />
           </IconButton>
         </Toolbar>

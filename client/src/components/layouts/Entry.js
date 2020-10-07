@@ -1,5 +1,5 @@
 import React from "react";
-import { TableCell, TableRow, Button } from "@material-ui/core/";
+import { TableCell, TableRow } from "@material-ui/core/";
 import ClearIcon from "@material-ui/icons/Clear";
 import styled from "styled-components";
 
