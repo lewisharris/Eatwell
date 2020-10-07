@@ -5,6 +5,7 @@ import { Button, TextField } from "@material-ui/core";
 import UserContext from "../../context/userContext";
 import Form from "../reusablecomponents/Form";
 import H3 from "../reusablecomponents/H3";
+import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
 
@@ -22,21 +23,85 @@ const UserSettingsPage = styled.div`
 export default function UserSettings(props) {
   const { userData } = useContext(UserContext);
   const history = useHistory();
+  const [stats, setStats] = useState();
+  const [calories, setCalories] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
 
   useEffect(() => {
     if (!userData.user) {
       history.push("/login");
       return;
     }
-  });
+    if (!stats) {
+      getUserStats();
+    }
+    if (stats) {
+      setHeight(stats.height);
+      setWeight(stats.weight[stats.weight.length - 1]);
+      setCalories(stats.targetCalories);
+    }
+  }, [stats]);
+
+  const getUserStats = () => {
+    const userId = userData.user.id;
+    axios
+      .get(`http://localhost:5000/stats/${userId}`, {
+        headers: { "x-auth-token": userData.token }
+      })
+      .then(res => setStats(res.data[0]))
+      .catch(err => console.log(err));
+  };
+
+  const submitForm = e => {
+    e.preventDefault();
+  };
+
   return (
     <UserSettingsPage>
-      <Form>
+      <Form
+        onSubmit={e => {
+          submitForm(e);
+          const userId = userData.user.id;
+          const userStats = {
+            height,
+            weight,
+            calories
+          };
+          axios
+            .put(
+              `http://localhost:5000/stats/update/${userId}`,
+              {
+                height: userStats.height,
+                weight: userStats.weight,
+                targetCalories: userStats.calories
+              },
+              { headers: { "x-auth-token": userData.token } }
+            )
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        }}
+      >
         <H3>Update Details</H3>
-        <TextField label="Username" type="text" />
-        <TextField label="Height (cm)" type="text" />
-        <TextField label="Weight (Kg)" type="text" />
-        <TextField label="Target Calories (Kcal)" type="text" />
+        <Input
+          label="Height (cm)"
+          type="text"
+          value={height}
+          name="height"
+          onChange={e => setHeight(e.target.value)}
+        />
+        <Input
+          label="Weight (Kg)"
+          type="text"
+          value={weight}
+          onChange={e => setWeight(e.target.value)}
+        />
+        <Input
+          label="Target Calories (Kcal)"
+          type="text"
+          value={calories}
+          onChange={e => setCalories(e.target.value)}
+        />
         <Button type="submit" color="secondary" variant="outlined">
           Update Details
         </Button>
