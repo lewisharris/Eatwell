@@ -2,12 +2,30 @@
 
 A Full Stack Calorie counting and food tracking app with user login and authentication.
 
-# User Story
+## User Story
 
 A user wants somewhere to track their food intake for the day by creating, editing food entries and tracking calories.
 
-    **Acceptance Criteria**
+### Acceptance Criteria
+
         User should be able to:
+
+## Design
+
+### Wireframes
+
+    - Register
+    - Login
+    - Dashboard
+    - Food Entry
+    - Food Search
+    - User Data Upate
+    - Weight Tracking
+
+### UI Design
+
+## Technologies Used
+
             - HTML: Although the project was created using React, it used JSX which follows the structure and functionality of HTML.
             - Javascript:
             - React:
@@ -21,25 +39,9 @@ A user wants somewhere to track their food intake for the day by creating, editi
             - JSON WebToken:
             - Mongoose:
 
-# Wireframes
+## Approach Taken
 
-    - Register
-    - Login
-    - Dashboard
-    - Food Entry
-    - Food Search
-    - User Data Upate
-    - Weight Tracking
-
-# UI Design
-
-# Technologies Used
-
-    -
-
-# Approach Taken
-
-# Installation Instructions
+## Installation Instructions
 
     1. Clone Project from repository
     2. Run `npm install` in root directory to install all dependancies in the package.json files
@@ -47,9 +49,10 @@ A user wants somewhere to track their food intake for the day by creating, editi
     4. Run `npx nodemon server` in the server folder to run the server locally.
     5. Run `npm start` in the client folder to run the front end
 
-    **Dependancies**
+#### Dependancies
 
-    Front End
+##### Front End
+
     ```
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -65,8 +68,8 @@ A user wants somewhere to track their food intake for the day by creating, editi
     "styled-components": "^5.2.0"
     ```
 
+##### Server/Back end
 
-    Server/Back end
     ```
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
@@ -76,4 +79,4 @@ A user wants somewhere to track their food intake for the day by creating, editi
     "mongoose": "^5.10.5"
     ```
 
-# Issues / Next-Steps
+## Issues / Next-Steps
