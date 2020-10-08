@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import CalorieStats from "../layouts/CalorieStats";
 import DailyDiary from "../layouts/DailyDiary";
 import AppNav from "../layouts/AppNav";
-import WelcomeMessage from "../layouts/WelcomeMessage";
 
 export default function Home() {
   const { userData } = useContext(UserContext);
@@ -64,7 +63,7 @@ export default function Home() {
     getFood();
     getUsername();
     setTargetCalories();
-  }, [userData, history, getFood, getUsername, setTargetCalories]);
+  }, []);
 
   return (
     <div>
