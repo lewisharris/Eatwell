@@ -1,12 +1,12 @@
-# user-login-system
+# Daily Calorie Tracker
 
-A Full Stack Calories counting andnfood tracking app with user login and authentication.
+A Full Stack Calorie counting and food tracking app with user login and authentication.
 
 # User Story
 
 A user wants somewhere to track their food intake for the day by creating, editing food entries and tracking calories.
 
-    Acceptance Criteria
+    **Acceptance Criteria**
         User should be able to:
             - HTML: Although the project was created using React, it used JSX which follows the structure and functionality of HTML.
             - Javascript:
@@ -31,6 +31,8 @@ A user wants somewhere to track their food intake for the day by creating, editi
     - User Data Upate
     - Weight Tracking
 
+# UI Design
+
 # Technologies Used
 
     -
@@ -45,10 +47,11 @@ A user wants somewhere to track their food intake for the day by creating, editi
     4. Run `npx nodemon server` in the server folder to run the server locally.
     5. Run `npm start` in the client folder to run the front end
 
-    *Dependancies*
+    **Dependancies**
 
     Front End
-    `"@material-ui/core": "^4.11.0",
+    ```
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -59,15 +62,18 @@ A user wants somewhere to track their food intake for the day by creating, editi
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "styled-components": "^5.2.0"`
+    "styled-components": "^5.2.0"
+    ```
 
 
     Server/Back end
-    `"bcrypt": "^5.0.0",
+    ```
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.5"`
+    "mongoose": "^5.10.5"
+    ```
 
 # Issues / Next-Steps
