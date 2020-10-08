@@ -22,13 +22,15 @@ const Label = styled.label`
 `;
 
 export default function Input(props) {
+  const { type, value, onChange, placeholder } = props;
   return (
     <Container>
       <Label>{props.label}</Label>
       <FormInput
-        type={props.type}
-        value={props.value}
-        onChange={props.onChange}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
       />
     </Container>
   );

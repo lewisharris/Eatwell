@@ -8,6 +8,7 @@ import H3 from "../reusablecomponents/H3";
 import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
+import ProfilePic from "../reusablecomponents/ProfilePic";
 
 //styling
 const UserSettingsPage = styled.div`
@@ -50,7 +51,9 @@ export default function UserSettings(props) {
       .get(`http://localhost:5000/stats/${userId}`, {
         headers: { "x-auth-token": userData.token }
       })
-      .then(res => setStats(res.data[0]))
+      .then(res => {
+        setStats(res.data[0]);
+      })
       .catch(err => console.log(err));
   };
 
@@ -76,7 +79,6 @@ export default function UserSettings(props) {
       .catch(err => console.log(err));
     history.push("/");
   };
-
   return (
     <UserSettingsPage>
       <Form
@@ -84,9 +86,11 @@ export default function UserSettings(props) {
           submitForm(e);
         }}
       >
-        <H3>Update Details</H3>
+        <ProfilePic />
+        <H3 centered>Update Details</H3>
         <Input
           label="Height (cm)"
+          placeholder={"Enter Height"}
           type="text"
           value={height}
           name="height"
@@ -94,6 +98,7 @@ export default function UserSettings(props) {
         />
         <Input
           label="Weight (Kg)"
+          placeholder={"Enter Weight"}
           type="text"
           value={weight}
           onChange={e => setWeight(e.target.value)}
@@ -102,6 +107,7 @@ export default function UserSettings(props) {
           label="Target Calories (Kcal)"
           type="text"
           value={calories}
+          placeholder={"Enter Calories"}
           onChange={e => setCalories(e.target.value)}
         />
         <Button type="submit" color="secondary" variant="outlined">

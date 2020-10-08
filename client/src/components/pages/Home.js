@@ -9,7 +9,7 @@ import AppNav from "../layouts/AppNav";
 export default function Home() {
   const { userData } = useContext(UserContext);
   const [listData, setListData] = useState([]);
-  const [targetCal, setTargetCal] = useState([]);
+  const [targetCal, setTargetCal] = useState(0);
 
   const [name, setName] = useState();
   const history = useHistory();
@@ -46,12 +46,13 @@ export default function Home() {
   }
 
   const setTargetCalories = async () => {
-    axios
+    await axios
       .get(`http://localhost:5000/stats/${userData.id}`, {
         headers: { "x-auth-token": userData.token }
       })
       .then(res => {
-        setTargetCal(res.data[0].targetCalories);
+        const cal = res.data.length === 0 ? 2000 : res.data[0].targetCalories;
+        setTargetCal(cal);
       });
   };
 
@@ -63,7 +64,7 @@ export default function Home() {
     getFood();
     getUsername();
     setTargetCalories();
-  }, []);
+  }, [userData]);
 
   return (
     <div>

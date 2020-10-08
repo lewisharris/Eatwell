@@ -60,7 +60,6 @@ export default function CalorieStats(props) {
           <P>
             Left:
             <Span leftCal={leftCal} remaining>
-              {" "}
               {leftCal}Kcal
             </Span>
           </P>

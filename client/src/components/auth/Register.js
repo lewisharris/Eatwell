@@ -12,22 +12,25 @@ export default function Register() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
-  const [name, setName] = useState();
+  const [username, setUsername] = useState();
   const [error, setError] = useState();
 
-  const { setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
 
   const submitForm = async e => {
     e.preventDefault();
     try {
+      // create new user
       const newUser = {
         email,
         password,
         passwordCheck,
-        name
+        username
       };
       await axios.post("http://localhost:5000/users/register", newUser);
+
+      //log new user in
       const loginResponse = await axios.post(
         "http://localhost:5000/users/login",
         {
@@ -35,16 +38,15 @@ export default function Register() {
           password
         }
       );
-      setUserData({
+      await setUserData({
         token: loginResponse.data.token,
         user: loginResponse.data.user
       });
+
       localStorage.setItem("auth-token", loginResponse.data.token);
       history.push("/");
     } catch (err) {
-      if (err.response.data.msg) {
-        setError(err.response.data.msg);
-      }
+      setError(err.response.data.msg);
     }
   };
 
@@ -74,7 +76,7 @@ export default function Register() {
       <TextField
         label="Username"
         type="text"
-        onChange={e => setName(e.target.value)}
+        onChange={e => setUsername(e.target.value)}
       />
       <Button type="submit" color="primary" variant="outlined" value="register">
         Register

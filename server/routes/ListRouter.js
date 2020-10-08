@@ -2,6 +2,7 @@ const router = require("express").Router();
 const auth = require("../middleware/auth");
 const Meal = require("../models/MealModel");
 
+// Add item to list
 router.post("/", auth, async (req, res) => {
   try {
     const { title, mealType, calories } = req.body;
@@ -29,6 +30,27 @@ router.post("/", auth, async (req, res) => {
     console.log(newFood);
     const savedFood = await newFood.save();
     res.json(savedFood);
+  } catch (err) {
+    res.status(500).json({ error: err.msg });
+  }
+});
+
+//find item in list and update it
+router.put("/update/:id", auth, async (req, res) => {
+  try {
+    await Meal.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        title: req.body.title,
+        mealType: req.body.mealType,
+        calories: req.body.calories
+      },
+      { upsert: false, useFindAndModify: false }
+    )
+      .then(res => {
+        console.log(res);
+      })
+      .then(res.json("updated"));
   } catch (err) {
     res.status(500).json({ error: err.msg });
   }
