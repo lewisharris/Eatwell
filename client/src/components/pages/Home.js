@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import CalorieStats from "../layouts/CalorieStats";
 import DailyDiary from "../layouts/DailyDiary";
 import AppNav from "../layouts/AppNav";
+import DatePicker from "../layouts/DatePicker";
 
 export default function Home() {
   const { userData } = useContext(UserContext);
@@ -69,7 +70,7 @@ export default function Home() {
   return (
     <div>
       <CalorieStats targetCal={targetCal} data={listData} name={name} />
-
+      <DatePicker />
       <DailyDiary data={listData} delete={removeFood} />
       <AppNav />
     </div>
