@@ -45,11 +45,25 @@ function App() {
     checkLogin();
   }, []);
 
-  console.log(
-    moment()
-      .subtract(2, "days")
-      .calendar()
-  );
+  function createDate(offset) {
+    return moment().subtract(offset, "days");
+  }
+  function formatDate(d) {
+    const date = d._d
+      .toString()
+      .split(" ")
+      .slice(1, 3)
+      .join(" ");
+    return date;
+  }
+
+  const yesterday = createDate(1);
+  const formatYday = formatDate(yesterday);
+  console.log(formatYday);
+
+  const wednesday = createDate(2);
+  const formatWed = formatDate(wednesday);
+  console.log(formatWed);
 
   return (
     <>
