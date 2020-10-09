@@ -13,6 +13,7 @@ import UserContext from "./context/userContext";
 import theme from "./theme/theme";
 import RecordFood from "./components/foodhandling/RecordFood";
 import SearchFood from "./components/pages/SearchFood";
+import moment from "moment";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -43,6 +44,12 @@ function App() {
     };
     checkLogin();
   }, []);
+
+  console.log(
+    moment()
+      .subtract(2, "days")
+      .calendar()
+  );
 
   return (
     <>
