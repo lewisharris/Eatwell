@@ -27,6 +27,7 @@ function formatDate(d) {
   return date;
 }
 
+// dates
 const yesterday = createDate(1);
 const formatYday = formatDate(yesterday);
 console.log(formatYday);
