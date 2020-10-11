@@ -13,7 +13,6 @@ import UserContext from "./context/userContext";
 import theme from "./theme/theme";
 import RecordFood from "./components/foodhandling/RecordFood";
 import SearchFood from "./components/pages/SearchFood";
-import moment from "moment";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -44,26 +43,6 @@ function App() {
     };
     checkLogin();
   }, []);
-
-  function createDate(offset) {
-    return moment().subtract(offset, "days");
-  }
-  function formatDate(d) {
-    const date = d._d
-      .toString()
-      .split(" ")
-      .slice(1, 3)
-      .join(" ");
-    return date;
-  }
-
-  const yesterday = createDate(1);
-  const formatYday = formatDate(yesterday);
-  console.log(formatYday);
-
-  const wednesday = createDate(2);
-  const formatWed = formatDate(wednesday);
-  console.log(formatWed);
 
   return (
     <>
