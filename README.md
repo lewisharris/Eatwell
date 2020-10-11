@@ -24,6 +24,14 @@ User should be able to:
 
 ### UI Design
 
+- Register
+- Login
+- Dashboard
+- Food Entry
+- Food Search
+- User Data Upate
+- Weight Tracking
+
 ## Technologies Used
 
 - HTML: Although the project was created using React, it used JSX which follows the structure and functionality of HTML.
