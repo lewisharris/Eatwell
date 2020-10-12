@@ -58,7 +58,7 @@ export default function CalorieStats(props) {
             Used:<Span> {usedCal}Kcal</Span>
           </P>
           <P>
-            Left:
+            Left:{" "}
             <Span leftCal={leftCal} remaining>
               {leftCal}Kcal
             </Span>

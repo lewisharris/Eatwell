@@ -4,11 +4,20 @@ A Full Stack Calorie counting and food tracking app with user login and authenti
 
 ## User Story
 
-A user wants somewhere to track their food intake for the day by creating, editing food entries and tracking calories.
+I want somewhere to track food intake for the day by creating, editing food entries and tracking calories, and tracking my weight/BMI.
 
 ### Acceptance Criteria
 
 User should be able to:
+
+- Create an account
+- Log in using credentials
+- Add a food entry including calories
+- Edit and delete a food entry.
+- See total calories for each meal of day.
+- User can search for food from database of food.
+- Enter Height and weight
+- See progress of weight entries and BMI on graph.
 
 ## Design
 
@@ -35,25 +44,33 @@ User should be able to:
 ## Technologies Used
 
 - HTML: Although the project was created using React, it used JSX which follows the structure and functionality of HTML.
-- Javascript:
-- React:
-- React Router:
-- Axios:
-- Material-UI:
-- Node & Express:
-- Styled Components:
-- Edamam API:
+- Javascript: Vanilla Javascript used for most of the front end logic
+- React: Used to build the UI
+- React Router: UI Routing
+- Axios: HTTP Requests
+- Material-UI: Used some Icons from material UI
+- Node & Express: server and routing created using express
+- Styled Components: Main styling of site utilizing styled Components for creating reusable components
+- Edamam API: Food database for finding food rather than entering your own
 - Bcrypt: used for pasword hashing
-- JSON WebToken:
-- Mongoose:
+- JSON WebToken: Token created for checking whether user is logged in
+- Mongoose: Used for MongoDB Schemas and fetching data from database
 
 ## Approach Taken
+
+- Constructed wireframes for layout of the mobile and desktop site.
+- Designed the UI of the app.
+- Chose a third party API for finding food data.
+- Set up the github repo and project board with a list of steps to completion.
+- Created the server, database and back end.
+- Created basic functioning front end without styling including authentication and user details.
+- Styled front end to match initial design.
 
 ## Installation Instructions
 
 1. Clone Project from repository
 2. Run `npm install` in root directory to install all dependancies in the package.json files
-3. Create a .env file in the server folder.
+3. Create a .env file in the server folder with a token and MongoDB database/collection path.
 4. Run `npx nodemon server` in the server folder to run the server locally.
 5. Run `npm start` in the client folder to run the front end
 
@@ -84,3 +101,8 @@ User should be able to:
     "mongoose": "^5.10.5"
 
 ## Issues / Next-Steps
+
+- Refactor DailyDiary code
+- Add Edamam API food search functionality
+- Display user BMI and weight details with graph.
+- Add datepicker feature with automatic date logging and day refresh.
