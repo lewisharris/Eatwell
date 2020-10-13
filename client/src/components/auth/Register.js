@@ -3,10 +3,13 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import ErrorNotice from "../misc/ErrorNotice";
-import { Button, TextField } from "@material-ui/core";
-import LockIcon from "@material-ui/icons/Lock";
 import Form from "../reusablecomponents/Form";
 import H3 from "../reusablecomponents/H3";
+import AuthPageBg from "../misc/AuthPageBg";
+import Input from "../reusablecomponents/Input";
+import Button from "../reusablecomponents/Button";
+import P from "../reusablecomponents/P";
+import Logo from "../reusablecomponents/Logo";
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -50,43 +53,56 @@ export default function Register() {
     }
   };
 
+  const goToLogin = () => {
+    history.push("/login");
+  };
+
   return (
-    <Form onSubmit={submitForm}>
-      <LockIcon fontSize="large" color="secondary" />
-      <H3>Sign Up</H3>
+    <AuthPageBg>
+      <Logo />
+      <Form onSubmit={submitForm}>
+        <H3>Sign Up</H3>
 
-      <TextField
-        label="Email"
-        type="email"
-        onChange={e => setEmail(e.target.value)}
-      />
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          onChange={e => setEmail(e.target.value)}
+        />
 
-      <TextField
-        label="Password*"
-        onChange={e => setPassword(e.target.value)}
-        type="password"
-      />
+        <Input
+          label="Password*"
+          name="password"
+          onChange={e => setPassword(e.target.value)}
+          type="password"
+        />
 
-      <TextField
-        label="Verify Password*"
-        onChange={e => setPasswordCheck(e.target.value)}
-        placeholder="verify password*"
-        type="password"
-      />
-      <TextField
-        label="Username"
-        type="text"
-        onChange={e => setUsername(e.target.value)}
-      />
-      <Button type="submit" color="primary" variant="outlined" value="register">
-        Register
-      </Button>
-      <ErrorNotice
-        message={error}
-        clearError={() => {
-          setError(undefined);
-        }}
-      />
-    </Form>
+        <Input
+          label="Verify Password*"
+          name="password-confirm"
+          onChange={e => setPasswordCheck(e.target.value)}
+          type="password"
+        />
+        <Input
+          label="Username"
+          type="text"
+          name="username"
+          onChange={e => setUsername(e.target.value)}
+        />
+        <Button type="submit" text="Register">
+          Register
+        </Button>
+        <ErrorNotice
+          message={error}
+          clearError={() => {
+            setError(undefined);
+          }}
+        />
+        <button type="button" onClick={goToLogin}>
+          <P>Already have an account?</P>
+          <P>Sign In </P>
+        </button>
+      </Form>
+    </AuthPageBg>
   );
 }

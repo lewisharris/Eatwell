@@ -6,7 +6,7 @@ A Full Stack Calorie counting and food tracking app with user login and authenti
 
 ## User Story
 
-I want somewhere to track food intake for the day by creating, editing food entries and tracking calories, and tracking my weight/BMI.git status
+I want somewhere to track food intake for the day by creating, editing food entries and tracking calories, and tracking my weight/BMI
 
 ### Acceptance Criteria
 

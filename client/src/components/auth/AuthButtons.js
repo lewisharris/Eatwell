@@ -13,7 +13,7 @@ const Header = styled.div`
   padding-right: 10vw;
   width: 100vw;
   height: 60px;
-  background: ${props => props.theme.primary};
+  background: ${props => props.theme.dark};
 `;
 const Logo = styled.h1`
   padding: 0px;
@@ -56,13 +56,7 @@ export default function AuthButtons() {
             Log out
           </button>
         </Header>
-      ) : (
-        <Header>
-          <Logo>EatWell</Logo>
-          <button onClick={register}>Register</button>
-          <button onClick={login}>Log In</button>
-        </Header>
-      )}
+      ) : null}
     </>
   );
 }

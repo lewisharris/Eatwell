@@ -3,10 +3,13 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import ErrorNotice from "../misc/ErrorNotice";
-import { Button, TextField } from "@material-ui/core";
-import LockIcon from "@material-ui/icons/Lock";
+import AuthPageBg from "../misc/AuthPageBg";
 import Form from "../reusablecomponents/Form";
 import H3 from "../reusablecomponents/H3";
+import Input from "../reusablecomponents/Input";
+import Button from "../reusablecomponents/Button";
+import P from "../reusablecomponents/P";
+import Logo from "../reusablecomponents/Logo";
 
 export default function Login() {
   const [email, setEmail] = useState();
@@ -40,40 +43,43 @@ export default function Login() {
     }
   };
 
+  const goToRegister = () => {
+    history.push("/register");
+  };
+
   return (
-    <Form onSubmit={submitForm}>
-      <LockIcon fontSize="large" color="secondary" />
-      <H3>Log in</H3>
+    <AuthPageBg>
+      <Logo />
+      <Form onSubmit={submitForm}>
+        <H3>Sign In</H3>
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          onChange={e => setEmail(e.target.value)}
+        />
 
-      <TextField
-        label="Email"
-        id="login-email"
-        type="email"
-        onChange={e => setEmail(e.target.value)}
-      />
+        <Input
+          label="Password"
+          name="password"
+          onChange={e => setPassword(e.target.value)}
+          type="password"
+        />
 
-      <TextField
-        label="Password"
-        onChange={e => setPassword(e.target.value)}
-        id="login-password"
-        type="text"
-      />
-
-      <Button
-        id="submit"
-        type="submit"
-        value="login"
-        color="primary"
-        variant="outlined"
-      >
-        Log in
-      </Button>
-      <ErrorNotice
-        message={error}
-        clearError={() => {
-          setError(undefined);
-        }}
-      />
-    </Form>
+        <Button type="submit" onClick={submitForm} text="Sign in">
+          Log in
+        </Button>
+        <ErrorNotice
+          message={error}
+          clearError={() => {
+            setError(undefined);
+          }}
+        />
+        <div onClick={goToRegister}>
+          <P>Not yet registered?</P>
+          <P>Sign up </P>
+        </div>
+      </Form>
+    </AuthPageBg>
   );
 }

@@ -9,16 +9,7 @@ import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
 import ProfilePic from "../reusablecomponents/ProfilePic";
-
-//styling
-const UserSettingsPage = styled.div`
-  background: ${props => props.theme.primary};
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-`;
+import InputPages from "../misc/InputPages";
 
 //component
 export default function UserSettings(props) {
@@ -80,7 +71,7 @@ export default function UserSettings(props) {
     history.push("/");
   };
   return (
-    <UserSettingsPage>
+    <InputPages>
       <Form
         onSubmit={e => {
           submitForm(e);
@@ -115,6 +106,6 @@ export default function UserSettings(props) {
         </Button>
       </Form>
       <AppNav />
-    </UserSettingsPage>
+    </InputPages>
   );
 }
