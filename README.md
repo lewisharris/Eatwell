@@ -1,8 +1,6 @@
-![](/design/UI/eatwell-mock-up.jpg)
+![](/design/UI/eatwell-mock-up-header.jpg)
 
-# EatWell
-
-## Calorie tracking app
+# EatWell Calorie tracking app
 
 A Full Stack Calorie counting and food tracking app with user login and authentication.
 
