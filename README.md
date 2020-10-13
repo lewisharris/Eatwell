@@ -23,23 +23,17 @@ User should be able to:
 
 ### Wireframes
 
-- Register
-- Login
-- Dashboard
-- Food Entry
-- Food Search
-- User Data Upate
-- Weight Tracking
+![](/design/wireframe/wireframes-1.png)
+Format: ![Alt Text](url)
+![](/design/wireframe/wireframes-2.png)
+Format: ![Alt Text](url)
 
 ### UI Design
 
-- Register
-- Login
-- Dashboard
-- Food Entry
-- Food Search
-- User Data Upate
-- Weight Tracking
+![](/design/UI/UI-design-1.png)
+Format: ![Alt Text](url)
+![](/design/UI/UI-design-2.png)
+Format: ![Alt Text](url)
 
 ## Technologies Used
 
