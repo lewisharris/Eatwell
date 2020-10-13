@@ -1,4 +1,8 @@
-# Daily Calorie Tracker
+![](/design/UI/eatwell-mockup.jpg)
+
+# EatWell
+
+## Calorie tracking app
 
 A Full Stack Calorie counting and food tracking app with user login and authentication.
 
@@ -24,16 +28,14 @@ User should be able to:
 ### Wireframes
 
 ![](/design/wireframe/wireframes-1.png)
-Format: ![Alt Text](url)
+
 ![](/design/wireframe/wireframes-2.png)
-Format: ![Alt Text](url)
 
 ### UI Design
 
-![](/design/UI/UI-design-1.png)
-Format: ![Alt Text](url)
-![](/design/UI/UI-design-2.png)
-Format: ![Alt Text](url)
+![](/design/UI/UI-design-01.png)
+
+![](/design/UI/UI-design-02.png)
 
 ## Technologies Used
 
