@@ -1,4 +1,4 @@
-![](/design/UI/eatwell-mockup.jpg)
+![](/design/UI/eatwell-mock-up.jpg)
 
 # EatWell
 
