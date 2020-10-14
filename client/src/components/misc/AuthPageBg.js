@@ -6,7 +6,7 @@ const AuthPageBg = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   position: relative;
   background: ${props => props.theme.background};
 `;
