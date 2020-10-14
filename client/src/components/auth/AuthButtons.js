@@ -2,26 +2,38 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/userContext";
 import styled from "styled-components";
-import AssessmentIcon from "@material-ui/icons/Assessment";
+import Logo from "../../images/logo.png";
 
 //Component styling
 
 const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding-right: 10vw;
+  position: relative;
   width: 100vw;
   height: 60px;
-  background: ${props => props.theme.dark};
+  background: ${props => props.theme.background};
+  border-bottom: 2px solid ${props => props.theme.primary};
+  -webkit-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
+  -moz-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
+  box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
 `;
-const Logo = styled.h1`
-  padding: 0px;
-  margin: 0px;
-  height: 60px;
-  line-height: 60px;
+
+const LogOut = styled.button`
+  box-sizing: border-box;
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  background: none;
   position: absolute;
   top: 0px;
+  line-height: 60px;
+  height: 60px;
+  right: 5vw;
+`;
+
+const Img = styled.img`
+  position: absolute;
+  top: 5px;
+  height: 40px;
   left: 5vw;
 `;
 
@@ -29,15 +41,6 @@ const Logo = styled.h1`
 export default function AuthButtons() {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
-
-  const register = e => {
-    e.preventDefault();
-    history.push("/register");
-  };
-  const login = e => {
-    e.preventDefault();
-    history.push("/login");
-  };
 
   const logout = e => {
     e.preventDefault();
@@ -50,11 +53,10 @@ export default function AuthButtons() {
     <>
       {userData.user ? (
         <Header>
-          <Logo>EatWell</Logo>
-          <AssessmentIcon />
-          <button onClick={logout} type="body1" edge="end" color="inherit">
+          <Img src={Logo} alt="EatWell" />
+          <LogOut onClick={e => logout(e)} type="button">
             Log out
-          </button>
+          </LogOut>
         </Header>
       ) : null}
     </>

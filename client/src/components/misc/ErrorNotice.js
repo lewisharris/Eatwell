@@ -2,17 +2,30 @@ import React from "react";
 import styled from "styled-components";
 
 const ErrorMessage = styled.button`
-  background: ${props => props.theme.error};
-  color: ${props => props.theme.textPrimary};
+  background: ${props => props.theme.card};
+  color: ${props => props.theme.error};
   box-sizing: border-box;
-  border-radius: 2px;
-  margin: 10px 0px;
+  font-size: 14px;
+  border: 2px solid ${props => props.theme.error};
+  border-radius: 10px;
+  margin: 10px auto;
+  min-width: 250px;
+  width: 100%;
+  max-width: 250px;
+  padding: 10px 0px;
 `;
+
+const Text = styled.div``;
 
 export default function ErrorNotice(props) {
   return (
-    <ErrorMessage onClick={props.clearError}>
-      <span>{props.message}</span>
-    </ErrorMessage>
+    <>
+      {props.message ? (
+        <ErrorMessage onClick={props.clearError}>
+          {" "}
+          <Text>{props.message}</Text>{" "}
+        </ErrorMessage>
+      ) : null}
+    </>
   );
 }

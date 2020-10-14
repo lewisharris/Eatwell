@@ -1,13 +1,13 @@
 const theme = {
-  primary: "#C93900",
-  secondary: "#42d7f5",
+  background: "#131515",
+  card: "#1F1F1F",
+  primary: "#12D5E6",
+  secondary: "#666666",
+  menu: "#1F1F1F",
   textPrimary: "white",
-  textSecondary: "gray",
+  textSecondary: "#8C8C8E",
   icon: "#D12E54",
-  error: "#DC143C",
-  faded: "#FFDED1",
-  lighter: "#F8F8F8",
-  dark: "black"
+  error: "#ff1744"
 };
 
 export default theme;

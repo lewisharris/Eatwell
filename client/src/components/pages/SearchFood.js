@@ -1,23 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import Button from "../reusablecomponents/Button";
 import UserContext from "../../context/userContext";
 import Form from "../reusablecomponents/Form";
 import H3 from "../reusablecomponents/H3";
+import P from "../reusablecomponents/P";
 import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
-
-//styling
-const UserStatsPage = styled.div`
-  background: ${props => props.theme.primary};
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-`;
 
 //component
 export default function SearchFood(props) {
@@ -37,7 +28,7 @@ export default function SearchFood(props) {
   };
 
   return (
-    <UserStatsPage>
+    <>
       <Form
         onSubmit={e => {
           submitForm(e);
@@ -45,14 +36,14 @@ export default function SearchFood(props) {
       >
         <H3>Look up food</H3>
         <Input label="Search" type="text" />
-        <div> some kind of drop down menu</div>
+        <P> some kind of drop down menu</P>
         <Input label="Weight (g)" type="text" />
-        <div>display calories here</div>
-        <Button type="submit" color="secondary" variant="outlined">
+        <P>display calories here</P>
+        <Button type="submit" onClick={e => submitForm(e)} text="Add Food">
           Add Food
         </Button>
       </Form>
       <AppNav />
-    </UserStatsPage>
+    </>
   );
 }

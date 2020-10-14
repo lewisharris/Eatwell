@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const ButtonStyle = styled.button`
-  padding: 10px;
+  padding: 10px 10px;
   box-sizing: border-box;
   border-radius: 5px;
-  background: black;
-  color: white;
+  border: 1px solid ${props => props.theme.primary};
+  color: ${props => props.theme.primary};
+  font-size: 14px;
   max-width: 100px;
-  font-weight: 700;
+  font-weight: 800;
   margin: 10px auto;
 `;
 

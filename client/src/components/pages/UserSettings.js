@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { Button, TextField } from "@material-ui/core";
+import Button from "../reusablecomponents/Button";
 import UserContext from "../../context/userContext";
 import Form from "../reusablecomponents/Form";
 import H3 from "../reusablecomponents/H3";
 import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
+import UserProfile from "../layouts/UserProfile";
 import axios from "axios";
-import ProfilePic from "../reusablecomponents/ProfilePic";
+
 import InputPages from "../misc/InputPages";
 
 //component
@@ -72,14 +73,14 @@ export default function UserSettings(props) {
   };
   return (
     <InputPages>
+      <UserProfile height={height} weight={weight} calories={calories} />
       <Form
         onSubmit={e => {
           submitForm(e);
         }}
       >
-        <ProfilePic />
-        <H3 centered>Update Details</H3>
         <Input
+          inactive
           label="Height (cm)"
           placeholder={"Enter Height"}
           type="text"
@@ -88,6 +89,7 @@ export default function UserSettings(props) {
           onChange={e => setHeight(e.target.value)}
         />
         <Input
+          inactive
           label="Weight (Kg)"
           placeholder={"Enter Weight"}
           type="text"
@@ -95,15 +97,14 @@ export default function UserSettings(props) {
           onChange={e => setWeight(e.target.value)}
         />
         <Input
+          inactive
           label="Target Calories (Kcal)"
           type="text"
           value={calories}
           placeholder={"Enter Calories"}
           onChange={e => setCalories(e.target.value)}
         />
-        <Button type="submit" color="secondary" variant="outlined">
-          Update Details
-        </Button>
+        <Button type="submit" onClick={e => submitForm(e)} text="Update" />
       </Form>
       <AppNav />
     </InputPages>

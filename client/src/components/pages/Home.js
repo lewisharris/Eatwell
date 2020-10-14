@@ -70,7 +70,9 @@ export default function Home() {
   return (
     <div>
       <CalorieStats targetCal={targetCal} data={listData} name={name} />
-      <DatePicker />
+      {
+        //<DatePicker />
+      }
       <DailyDiary data={listData} delete={removeFood} />
       <AppNav />
     </div>

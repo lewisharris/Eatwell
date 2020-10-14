@@ -4,8 +4,9 @@ import logo from "../../images/logo.png";
 import P from "./P";
 
 const Img = styled.img`
-  margin: 5vh auto;
-  width: 50px;
+  margin: 0px auto;
+  flex-grow: 0;
+  width: 60px;
 `;
 
 export default function Logo() {

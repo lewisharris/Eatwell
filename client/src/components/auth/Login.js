@@ -10,9 +10,11 @@ import Input from "../reusablecomponents/Input";
 import Button from "../reusablecomponents/Button";
 import P from "../reusablecomponents/P";
 import Logo from "../reusablecomponents/Logo";
+import LoadingIcon from "../reusablecomponents/LoadingIcon";
 
 export default function Login() {
   const [email, setEmail] = useState();
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState();
   const [error, setError] = useState();
 
@@ -26,6 +28,9 @@ export default function Login() {
         email,
         password
       };
+      if (loginUser) {
+        setLoading(true);
+      }
       const loginResponse = await axios.post(
         "http://localhost:5000/users/login",
         loginUser
@@ -38,6 +43,7 @@ export default function Login() {
       history.push("/");
     } catch (err) {
       if (err.response.data.msg) {
+        setLoading(false);
         setError(err.response.data.msg);
       }
     }
@@ -47,7 +53,11 @@ export default function Login() {
     history.push("/register");
   };
 
-  return (
+  return loading === true ? (
+    <AuthPageBg>
+      <LoadingIcon />
+    </AuthPageBg>
+  ) : (
     <AuthPageBg>
       <Logo />
       <Form onSubmit={submitForm}>
@@ -63,7 +73,7 @@ export default function Login() {
           label="Password"
           name="password"
           onChange={e => setPassword(e.target.value)}
-          type="password"
+          type="text"
         />
 
         <Button type="submit" onClick={submitForm} text="Sign in">
@@ -71,7 +81,8 @@ export default function Login() {
         </Button>
         <ErrorNotice
           message={error}
-          clearError={() => {
+          clearError={e => {
+            e.preventDefault();
             setError(undefined);
           }}
         />

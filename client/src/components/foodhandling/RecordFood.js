@@ -7,18 +7,12 @@ import ErrorNotice from "../misc/ErrorNotice";
 import AppNav from "../layouts/AppNav";
 import Form from "../reusablecomponents/Form";
 import H3 from "../reusablecomponents/H3";
-import FastfoodIcon from "@material-ui/icons/Fastfood";
-import { Button, TextField } from "@material-ui/core";
+import Button from "../reusablecomponents/Button";
+import Input from "../reusablecomponents/Input";
+import Select from "../reusablecomponents/Select";
 
 //Component Styling
-const RecordFoodPage = styled.div`
-  background: ${props => props.theme.primary};
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-`;
+const RecordFoodPage = styled.div``;
 
 //Component
 export default function RecordFood(props) {
@@ -82,34 +76,26 @@ export default function RecordFood(props) {
   return (
     <RecordFoodPage>
       <Form onSubmit={submitForm}>
-        <FastfoodIcon fontSize="large" color="secondary" />
         <H3>Log New Meal</H3>
-        <label htmlFor="food-title">Meal/Food*</label>
-        <TextField
+        <Input
           label="Meal/Food*"
           type="text"
           onChange={e => setTitle(e.target.value)}
         />
-        <label htmlFor="meal-type">Meal Type</label>
 
-        <select
+        <Select
           value={mealType}
-          id="meal-type"
+          label="MealType"
+          type="select"
           onChange={e => setMealType(e.target.value)}
-        >
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-          <option value="snack">Snack</option>
-        </select>
-        <TextField
+          options={["breakfast", "lunch", "dinner", "snack"]}
+        />
+        <Input
           label="Calories*"
           type="text"
           onChange={e => setCalories(e.target.value)}
         />
-        <Button type="submit" color="secondary" variant="outlined">
-          Add
-        </Button>
+        <Button type="submit" onClick={submitForm} text="Add" />
         <ErrorNotice
           message={error}
           clearError={() => {

@@ -10,6 +10,7 @@ import Input from "../reusablecomponents/Input";
 import Button from "../reusablecomponents/Button";
 import P from "../reusablecomponents/P";
 import Logo from "../reusablecomponents/Logo";
+import LoadingIcon from "../reusablecomponents/LoadingIcon";
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -17,6 +18,7 @@ export default function Register() {
   const [passwordCheck, setPasswordCheck] = useState();
   const [username, setUsername] = useState();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
@@ -31,6 +33,9 @@ export default function Register() {
         passwordCheck,
         username
       };
+      if (newUser) {
+        setLoading(true);
+      }
       await axios.post("http://localhost:5000/users/register", newUser);
 
       //log new user in
@@ -49,6 +54,7 @@ export default function Register() {
       localStorage.setItem("auth-token", loginResponse.data.token);
       history.push("/");
     } catch (err) {
+      setLoading(false);
       setError(err.response.data.msg);
     }
   };
@@ -57,14 +63,18 @@ export default function Register() {
     history.push("/login");
   };
 
-  return (
+  return loading === true ? (
+    <AuthPageBg>
+      <LoadingIcon />
+    </AuthPageBg>
+  ) : (
     <AuthPageBg>
       <Logo />
       <Form onSubmit={submitForm}>
         <H3>Sign Up</H3>
 
         <Input
-          label="Email"
+          label="Email*"
           type="email"
           name="email"
           onChange={e => setEmail(e.target.value)}
@@ -84,17 +94,18 @@ export default function Register() {
           type="password"
         />
         <Input
-          label="Username"
+          label="Username*"
           type="text"
           name="username"
           onChange={e => setUsername(e.target.value)}
         />
-        <Button type="submit" text="Register">
+        <Button type="submit" text="Register" onClick={e => submitForm(e)}>
           Register
         </Button>
         <ErrorNotice
           message={error}
-          clearError={() => {
+          clearError={e => {
+            e.preventDefault();
             setError(undefined);
           }}
         />
