@@ -7,7 +7,8 @@ const theme = {
   textPrimary: "white",
   textSecondary: "#8C8C8E",
   icon: "#D12E54",
-  error: "#ff1744"
+  error: "#ff1744",
+  maxWidth: "1200px"
 };
 
 export default theme;

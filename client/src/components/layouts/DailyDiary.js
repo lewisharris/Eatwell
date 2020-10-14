@@ -1,14 +1,12 @@
 import Entry from "./Entry";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {
-  TableBody,
-  TableContainer,
-  Paper,
-  Typography
-} from "@material-ui/core/";
+import { TableBody } from "@material-ui/core/";
 import Table from "./Table";
+import H2 from "../reusablecomponents/H2";
+import P from "../reusablecomponents/P";
 
+// styling
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,19 +15,20 @@ const Container = styled.div`
   max-width: 1000px;
 `;
 
-export default class DailyDiary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataList: [],
-      breakfast: [],
-      lunch: [],
-      dinner: [],
-      snack: []
-    };
-  }
+export default function DailyDiary(props) {
+  const dataList = props.data;
+  const [breakfast, setBreakfast] = useState([]);
+  const [lunch, setLunch] = useState([]);
+  const [dinner, setDinner] = useState([]);
+  const [snacks, setSnacks] = useState([]);
 
-  renderTotal = list => {
+  useEffect(() => {
+    sortList();
+    sortList();
+  }, [dataList]);
+
+  // calculate total calories
+  const renderTotal = list => {
     console.log(list);
     if (list.length === 0) {
       return "0";
@@ -44,130 +43,134 @@ export default class DailyDiary extends Component {
     }
   };
 
-  sortList = (data, filterVal) => {
-    const list = data.filter(entry => {
-      return entry.mealType === filterVal;
+  const sortList = () => {
+    const data = dataList;
+    if (dataList === []) {
+      return;
+    }
+    const breakfastList = data.filter(entry => {
+      return entry.mealType === "breakfast";
     });
+    setBreakfast(breakfastList);
+
+    const lunchList = data.filter(entry => {
+      return entry.mealType === "lunch";
+    });
+    setLunch(lunchList);
   };
 
-  renderList = () => {};
+  return (
+    <Container>
+      {breakfast.length === 0 ? (
+        <div>no entries</div>
+      ) : (
+        breakfast.map(entry => (
+          <Entry key={entry._id} data={entry} delete={props.delete} />
+        ))
+      )}
+      <H2>Breakfast</H2>
+      <Table>
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Calories</th>
+            <th></th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <TableBody>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "breakfast";
+                })
+                .map(entry => {
+                  return (
+                    <Entry key={entry._id} data={entry} delete={props.delete} />
+                  );
+                })
+            : null}
+        </TableBody>
+      </Table>
+      <P large>Total:</P>
 
-  componentDidMount() {
-    const { data } = this.props;
-    this.setState({ dataList: data });
-  }
-  componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    if (data !== prevProps.data) {
-      this.setState({ dataList: data });
-    }
-    this.sortList(this.state.dataList, "breakfast");
-  }
+      <H2>Lunch</H2>
+      <Table>
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Calories</th>
+            <th></th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <TableBody>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "lunch";
+                })
+                .map(entry => {
+                  return (
+                    <Entry key={entry._id} data={entry} delete={props.delete} />
+                  );
+                })
+            : null}
+        </TableBody>
+      </Table>
+      <P large>Total:</P>
 
-  render() {
-    const { dataList } = this.state;
+      <H2>Dinner</H2>
+      <Table>
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Calories</th>
+            <th></th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <TableBody>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "dinner";
+                })
+                .map(entry => {
+                  return (
+                    <Entry key={entry._id} data={entry} delete={props.delete} />
+                  );
+                })
+            : null}
+        </TableBody>
+      </Table>
+      <P large>Total:</P>
 
-    return (
-      <Container>
-        <Table>
-          <thead>
-            <tr>
-              <th>Food</th>
-              <th>Calories</th>
-              <th></th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-        </Table>
-
-        <Typography variant="h6">Breakfast</Typography>
-        <Table>
-          <TableBody>
-            {dataList
-              ? dataList
-                  .filter(entry => {
-                    return entry.mealType === "breakfast";
-                  })
-                  .map(entry => {
-                    return (
-                      <Entry
-                        key={entry._id}
-                        data={entry}
-                        delete={this.props.delete}
-                      />
-                    );
-                  })
-              : null}
-          </TableBody>
-        </Table>
-        <p>Total:</p>
-
-        <Typography variant="h6">Lunch</Typography>
-        <Table>
-          <TableBody>
-            {dataList
-              ? dataList
-                  .filter(entry => {
-                    return entry.mealType === "lunch";
-                  })
-                  .map(entry => {
-                    return (
-                      <Entry
-                        key={entry._id}
-                        data={entry}
-                        delete={this.props.delete}
-                      />
-                    );
-                  })
-              : null}
-          </TableBody>
-        </Table>
-        <p>Total: </p>
-
-        <Typography variant="h6">Dinner</Typography>
-        <Table>
-          <TableBody>
-            {dataList
-              ? dataList
-                  .filter(entry => {
-                    return entry.mealType === "dinner";
-                  })
-                  .map(entry => {
-                    return (
-                      <Entry
-                        key={entry._id}
-                        data={entry}
-                        delete={this.props.delete}
-                      />
-                    );
-                  })
-              : null}
-          </TableBody>
-        </Table>
-        <p>Total: </p>
-
-        <Typography variant="h6">Snacks</Typography>
-        <Table>
-          <TableBody>
-            {dataList
-              ? dataList
-                  .filter(entry => {
-                    return entry.mealType === "snack";
-                  })
-                  .map(entry => {
-                    return (
-                      <Entry
-                        key={entry._id}
-                        data={entry}
-                        delete={this.props.delete}
-                      />
-                    );
-                  })
-              : null}
-          </TableBody>
-        </Table>
-        <p>Total: </p>
-      </Container>
-    );
-  }
+      <H2>Snacks</H2>
+      <Table>
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Calories</th>
+            <th></th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <TableBody>
+          {dataList
+            ? dataList
+                .filter(entry => {
+                  return entry.mealType === "snack";
+                })
+                .map(entry => {
+                  return (
+                    <Entry key={entry._id} data={entry} delete={props.delete} />
+                  );
+                })
+            : null}
+        </TableBody>
+      </Table>
+      <P large>Total:</P>
+    </Container>
+  );
 }

@@ -3,15 +3,23 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import WelcomeMessage from "./WelcomeMessage";
 
-const Stats = styled.h1`
+const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0px auto;
+  height: 40px;
+  background: ${props => props.theme.background};
+  max-width: ${props => props.theme.maxWidth};
 `;
+
 const P = styled.p`
   color: ${props => props.theme.textPrimary};
-  font-size: 16px;
-  padding: 0px 2vw;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0px auto;
+  line-height: 40px;
 `;
 
 const Span = styled.span`
@@ -22,20 +30,11 @@ const Span = styled.span`
       return props.theme.textPrimary;
     }
   }};
-  font-size: 16px;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding: 10px;
-  width: 100vw;
-  background: #262626;
+  font-size: 12px;
+  font-weight: 600;
 `;
 
 export default function CalorieStats(props) {
-  const history = useHistory();
   const targetCal = parseInt(props.targetCal);
   const usedCal = props.data
     .map(item => {
@@ -50,20 +49,18 @@ export default function CalorieStats(props) {
   return (
     <>
       <Container>
-        <Stats>
-          <P>
-            Goal:<Span> {targetCal}Kcal</Span>
-          </P>
-          <P>
-            Used:<Span> {usedCal}Kcal</Span>
-          </P>
-          <P>
-            Left:{" "}
-            <Span leftCal={leftCal} remaining>
-              {leftCal}Kcal
-            </Span>
-          </P>
-        </Stats>
+        <P>
+          Goal:<Span> {targetCal}Kcal</Span>
+        </P>
+        <P>
+          Used:<Span> {usedCal}Kcal</Span>
+        </P>
+        <P>
+          Left:{" "}
+          <Span leftCal={leftCal} remaining>
+            {leftCal}Kcal
+          </Span>
+        </P>
       </Container>
       <WelcomeMessage name={props.name} leftCal={leftCal} />
     </>

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import styled from "styled-components";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 import { useHistory } from "react-router-dom";
@@ -6,6 +7,11 @@ import CalorieStats from "../layouts/CalorieStats";
 import DailyDiary from "../layouts/DailyDiary";
 import AppNav from "../layouts/AppNav";
 import DatePicker from "../layouts/DatePicker";
+
+const Container = styled.div`
+  max-width: ${props => props.theme.maxWidth};
+  margin: 0px auto;
+`;
 
 export default function Home() {
   const { userData } = useContext(UserContext);
@@ -69,11 +75,13 @@ export default function Home() {
 
   return (
     <div>
-      <CalorieStats targetCal={targetCal} data={listData} name={name} />
-      {
-        //<DatePicker />
-      }
-      <DailyDiary data={listData} delete={removeFood} />
+      <Container>
+        <CalorieStats targetCal={targetCal} data={listData} name={name} />
+        {
+          //<DatePicker />
+        }
+        <DailyDiary data={listData} delete={removeFood} />
+      </Container>
       <AppNav />
     </div>
   );

@@ -5,7 +5,7 @@ const P = styled.p`
   text-align: left;
   margin: 5px 10px;
   font-weight: 600;
-  font-size: 12px;
+  font-size: ${props => (props.large ? "16px" : "12px")};
 `;
 
 export default P;
