@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const FormInput = styled.input`
-  transition: all 0.3ms ease-in-out;
+  transition: all 0.4s ease-in-out;
   height: 50px;
   width: 100%;
   min-width: 250px;
@@ -34,12 +34,24 @@ const FormInput = styled.input`
     }};
   :active,
   :focus {
+    -webkit-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary},
+      inset 0px 0px 5px 0px ${props => props.theme.primary};
+    -moz-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary},
+      inset 0px 0px 5px 0px ${props => props.theme.primary};
+    box-shadow: 0px 0px 5px 0px ${props => props.theme.primary},
+      inset 0px 0px 5px 0px ${props => props.theme.primary};
     border: 2px solid ${props => props.theme.primary};
     background: ${props => props.theme.card};
     outline: none;
     color: ${props => props.theme.textPrimary};
     + label {
-      color: ${props => props.theme.primary};
+      transition: all 0.2s ease-in-out;
+      color: ${props => props.theme.background};
+      background: ${props => props.theme.primary};
+
+      -webkit-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary};
+      -moz-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary};
+      box-shadow: 0px 0px 5px 0px ${props => props.theme.primary};
     }
   }
   :-webkit-autofill,
@@ -53,6 +65,7 @@ const FormInput = styled.input`
 
 const Label = styled.label`
   position: absolute;
+  border-radius: 10px;
   top: 0px;
   left: 10px;
   font-size: 12px;

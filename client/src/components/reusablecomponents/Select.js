@@ -16,6 +16,13 @@ const SelectInput = styled.select`
   :focus {
     border: 2px solid ${props => props.theme.primary};
     background: ${props => props.theme.card};
+    -webkit-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary},
+      inset 0px 0px 5px 0px ${props => props.theme.primary};
+    -moz-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary},
+      inset 0px 0px 5px 0px ${props => props.theme.primary};
+    box-shadow: 0px 0px 5px 0px ${props => props.theme.primary},
+      inset 0px 0px 5px 0px ${props => props.theme.primary};
+    border: 2px solid ${props => props.theme.primary};
   }
 `;
 const Label = styled.label`
