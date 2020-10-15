@@ -12,7 +12,6 @@ import P from "../reusablecomponents/P";
 import Logo from "../reusablecomponents/Logo";
 import LoadingIcon from "../reusablecomponents/LoadingIcon";
 import SideImage from "../misc/SideImage";
-import Runner from "../../images/runner.jpg";
 import AuthFormContainer from "../misc/AuthFormContainer";
 
 export default function Login() {
@@ -55,7 +54,7 @@ export default function Login() {
 
   const getViewport = () => {
     windowWidth = window.innerWidth;
-    if (windowWidth > 700) {
+    if (windowWidth > 1050) {
       setSplitScreen(true);
     } else {
       setSplitScreen(false);
@@ -78,9 +77,7 @@ export default function Login() {
     </AuthPageBg>
   ) : (
     <AuthPageBg>
-      <div>
-        {splitScreen ? <SideImage src={Runner} alt="front image" /> : null}
-      </div>
+      <div>{splitScreen ? <SideImage alt="front image" /> : null}</div>
       <AuthFormContainer>
         <Logo />
         <Form onSubmit={submitForm}>
