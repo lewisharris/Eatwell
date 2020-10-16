@@ -9,6 +9,7 @@ const Container = styled.div`
 `;
 
 const FormInput = styled.input`
+  caret-color: ${props => props.theme.primary};
   transition: all 0.4s ease-in-out;
   height: 50px;
   width: 100%;
@@ -45,10 +46,8 @@ const FormInput = styled.input`
     outline: none;
     color: ${props => props.theme.textPrimary};
     + label {
-      transition: all 0.2s ease-in-out;
       color: ${props => props.theme.background};
       background: ${props => props.theme.primary};
-
       -webkit-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary};
       -moz-box-shadow: 0px 0px 5px 0px ${props => props.theme.primary};
       box-shadow: 0px 0px 5px 0px ${props => props.theme.primary};
@@ -64,6 +63,7 @@ const FormInput = styled.input`
 `;
 
 const Label = styled.label`
+  transition: all 0.2s ease-in-out;
   position: absolute;
   border-radius: 10px;
   top: 0px;

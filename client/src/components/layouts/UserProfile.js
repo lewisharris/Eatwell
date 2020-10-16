@@ -24,6 +24,7 @@ const Details = styled.div`
   flex-direction: column;
   justify-content: center;
   max-width: 50%;
+  min-width: 40%;
   hyphens: auto;
 `;
 

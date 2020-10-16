@@ -83,7 +83,7 @@ export default function UserSettings(props) {
           inactive
           label="Height (cm)"
           placeholder={"Enter Height"}
-          type="text"
+          type="number"
           value={height}
           name="height"
           onChange={e => setHeight(e.target.value)}
@@ -92,14 +92,14 @@ export default function UserSettings(props) {
           inactive
           label="Weight (Kg)"
           placeholder={"Enter Weight"}
-          type="text"
+          type="number"
           value={weight}
           onChange={e => setWeight(e.target.value)}
         />
         <Input
           inactive
           label="Target Calories (Kcal)"
-          type="text"
+          type="number"
           value={calories}
           placeholder={"Enter Calories"}
           onChange={e => setCalories(e.target.value)}
