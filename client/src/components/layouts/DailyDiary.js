@@ -15,6 +15,7 @@ const Container = styled.div`
   max-width: 1000px;
 `;
 
+//component
 export default function DailyDiary(props) {
   const dataList = props.data;
   const [breakfast, setBreakfast] = useState([]);
