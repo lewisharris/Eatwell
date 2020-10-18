@@ -44,6 +44,7 @@ export default function DailyDiary(props) {
     }
   };
 
+  // organise seperate lists for each meal type
   const sortList = () => {
     const data = dataList;
     if (dataList === []) {
@@ -58,6 +59,14 @@ export default function DailyDiary(props) {
       return entry.mealType === "lunch";
     });
     setLunch(lunchList);
+    const dinnerList = data.filter(entry => {
+      return entry.mealType === "dinner";
+    });
+    setLunch(dinnerList);
+    const snacksList = data.filter(entry => {
+      return entry.mealType === "snack";
+    });
+    setSnacks(snacksList);
   };
 
   return (
