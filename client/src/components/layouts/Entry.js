@@ -1,9 +1,22 @@
 import React, { useState, useContext } from "react";
-import { TableCell, TableRow } from "@material-ui/core/";
 import ClearIcon from "@material-ui/icons/Clear";
 import styled from "styled-components";
 import axios from "axios";
 import UserContext from "../../context/userContext";
+
+const Tr = styled.tr`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
+`;
+
+const Td = styled.td`
+  color: ${props => props.theme.textPrimary};
+  text-align: ${props => (props.leftAlign ? "left" : "right")};
+  width: 25%;
+`;
 
 const Cancel = styled.button`
   width: 30px;
@@ -43,9 +56,9 @@ export default function Entry(props) {
   };
 
   return (
-    <TableRow>
+    <Tr>
       {edit ? (
-        <TableCell align="right">
+        <Td leftAlign>
           <input
             type="text"
             value={editTitle}
@@ -57,23 +70,23 @@ export default function Entry(props) {
             onChange={e => setEditCalories(e.target.value)}
           />
           <button onClick={e => toggleEdit(e)}> Confirm</button>
-        </TableCell>
+        </Td>
       ) : (
         <>
-          <TableCell align="right">{editTitle}</TableCell>
-          <TableCell align="right">{editCalories} Kcal</TableCell>
-          <TableCell align="right">
+          <Td leftAlign>{editTitle}</Td>
+          <Td>{editCalories} Kcal</Td>
+          <Td>
             <button onClick={e => toggleEdit(e)}> Edit</button>
-          </TableCell>
+          </Td>
         </>
       )}
 
-      <TableCell align="right">
+      <Td>
         <Cancel onClick={() => props.delete(props.data._id)}>
           <ClearIcon fontSize="small" />
         </Cancel>
-      </TableCell>
-    </TableRow>
+      </Td>
+    </Tr>
   );
 }
 

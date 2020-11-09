@@ -25,23 +25,23 @@ export default function DailyDiary(props) {
 
   useEffect(() => {
     sortList();
-    sortList();
   }, [dataList]);
 
   // calculate total calories
   const renderTotal = list => {
-    console.log(list);
+    let total = 0;
     if (list.length === 0) {
-      return "0";
+      total = 0;
     } else {
-      list
+      total = list
         .map(entry => {
-          return entry.calories;
+          return parseInt(entry.calories);
         })
         .reduce((a, b) => {
           return a + b;
         });
     }
+    return total;
   };
 
   // organise seperate lists for each meal type
@@ -59,10 +59,12 @@ export default function DailyDiary(props) {
       return entry.mealType === "lunch";
     });
     setLunch(lunchList);
+
     const dinnerList = data.filter(entry => {
       return entry.mealType === "dinner";
     });
-    setLunch(dinnerList);
+    setDinner(dinnerList);
+
     const snacksList = data.filter(entry => {
       return entry.mealType === "snack";
     });
@@ -71,116 +73,66 @@ export default function DailyDiary(props) {
 
   return (
     <Container>
-      {breakfast.length === 0 ? (
-        <div>no entries</div>
-      ) : (
-        breakfast.map(entry => (
-          <Entry key={entry._id} data={entry} delete={props.delete} />
-        ))
-      )}
       <H2>Breakfast</H2>
-      <Table>
-        <thead>
-          <tr>
-            <th>Food</th>
-            <th>Calories</th>
-            <th></th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <TableBody>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "breakfast";
-                })
-                .map(entry => {
-                  return (
-                    <Entry key={entry._id} data={entry} delete={props.delete} />
-                  );
-                })
-            : null}
-        </TableBody>
-      </Table>
-      <P large>Total:</P>
 
+      {breakfast.length === 0 ? (
+        <p>no entries</p>
+      ) : (
+        <Table>
+          <tbody>
+            {breakfast.map(entry => (
+              <Entry key={entry._id} data={entry} delete={props.delete} />
+            ))}
+          </tbody>
+        </Table>
+      )}
+
+      <P large>Total:{renderTotal(breakfast)}</P>
       <H2>Lunch</H2>
-      <Table>
-        <thead>
-          <tr>
-            <th>Food</th>
-            <th>Calories</th>
-            <th></th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <TableBody>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "lunch";
-                })
-                .map(entry => {
-                  return (
-                    <Entry key={entry._id} data={entry} delete={props.delete} />
-                  );
-                })
-            : null}
-        </TableBody>
-      </Table>
-      <P large>Total:</P>
 
+      {lunch.length === 0 ? (
+        <p>no entries</p>
+      ) : (
+        <Table>
+          <tbody>
+            {lunch.map(entry => (
+              <Entry key={entry._id} data={entry} delete={props.delete} />
+            ))}
+          </tbody>
+        </Table>
+      )}
+
+      <P large>Total:{renderTotal(lunch)}</P>
       <H2>Dinner</H2>
-      <Table>
-        <thead>
-          <tr>
-            <th>Food</th>
-            <th>Calories</th>
-            <th></th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <TableBody>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "dinner";
-                })
-                .map(entry => {
-                  return (
-                    <Entry key={entry._id} data={entry} delete={props.delete} />
-                  );
-                })
-            : null}
-        </TableBody>
-      </Table>
-      <P large>Total:</P>
 
+      {dinner.length === 0 ? (
+        <p>no entries</p>
+      ) : (
+        <Table>
+          <tbody>
+            {dinner.map(entry => (
+              <Entry key={entry._id} data={entry} delete={props.delete} />
+            ))}
+          </tbody>
+        </Table>
+      )}
+
+      <P large>Total:{renderTotal(dinner)}</P>
       <H2>Snacks</H2>
-      <Table>
-        <thead>
-          <tr>
-            <th>Food</th>
-            <th>Calories</th>
-            <th></th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <TableBody>
-          {dataList
-            ? dataList
-                .filter(entry => {
-                  return entry.mealType === "snack";
-                })
-                .map(entry => {
-                  return (
-                    <Entry key={entry._id} data={entry} delete={props.delete} />
-                  );
-                })
-            : null}
-        </TableBody>
-      </Table>
-      <P large>Total:</P>
+
+      {snacks.length === 0 ? (
+        <p>no entries</p>
+      ) : (
+        <Table>
+          <tbody>
+            {snacks.map(entry => (
+              <Entry key={entry._id} data={entry} delete={props.delete} />
+            ))}{" "}
+          </tbody>
+        </Table>
+      )}
+
+      <P large>Total:{renderTotal(snacks)}</P>
     </Container>
   );
 }
