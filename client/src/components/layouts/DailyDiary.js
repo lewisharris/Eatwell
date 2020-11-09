@@ -33,13 +33,13 @@ export default function DailyDiary(props) {
     if (list.length === 0) {
       total = 0;
     } else {
-      total = list
+      total = `${list
         .map(entry => {
           return parseInt(entry.calories);
         })
         .reduce((a, b) => {
           return a + b;
-        });
+        })} Kcal`;
     }
     return total;
   };
@@ -74,65 +74,78 @@ export default function DailyDiary(props) {
   return (
     <Container>
       <H2>Breakfast</H2>
-
       {breakfast.length === 0 ? (
-        <p>no entries</p>
+        <P italic indent>
+          no entries
+        </P>
       ) : (
-        <Table>
-          <tbody>
-            {breakfast.map(entry => (
-              <Entry key={entry._id} data={entry} delete={props.delete} />
-            ))}
-          </tbody>
-        </Table>
+        <>
+          <Table>
+            <tbody>
+              {breakfast.map(entry => (
+                <Entry key={entry._id} data={entry} delete={props.delete} />
+              ))}
+            </tbody>
+          </Table>
+          <P large>Total: {renderTotal(breakfast)}</P>
+        </>
       )}
 
-      <P large>Total:{renderTotal(breakfast)}</P>
       <H2>Lunch</H2>
 
       {lunch.length === 0 ? (
-        <p>no entries</p>
+        <P italic indent>
+          no entries
+        </P>
       ) : (
-        <Table>
-          <tbody>
-            {lunch.map(entry => (
-              <Entry key={entry._id} data={entry} delete={props.delete} />
-            ))}
-          </tbody>
-        </Table>
+        <>
+          <Table>
+            <tbody>
+              {lunch.map(entry => (
+                <Entry key={entry._id} data={entry} delete={props.delete} />
+              ))}
+            </tbody>
+          </Table>
+          <P large>Total: {renderTotal(lunch)}</P>
+        </>
       )}
 
-      <P large>Total:{renderTotal(lunch)}</P>
       <H2>Dinner</H2>
 
       {dinner.length === 0 ? (
-        <p>no entries</p>
+        <P italic indent>
+          no entries
+        </P>
       ) : (
-        <Table>
-          <tbody>
-            {dinner.map(entry => (
-              <Entry key={entry._id} data={entry} delete={props.delete} />
-            ))}
-          </tbody>
-        </Table>
+        <>
+          <Table>
+            <tbody>
+              {dinner.map(entry => (
+                <Entry key={entry._id} data={entry} delete={props.delete} />
+              ))}
+            </tbody>
+          </Table>
+          <P large>Total: {renderTotal(dinner)}</P>
+        </>
       )}
 
-      <P large>Total:{renderTotal(dinner)}</P>
       <H2>Snacks</H2>
-
       {snacks.length === 0 ? (
-        <p>no entries</p>
+        <P italic indent>
+          no entries
+        </P>
       ) : (
-        <Table>
-          <tbody>
-            {snacks.map(entry => (
-              <Entry key={entry._id} data={entry} delete={props.delete} />
-            ))}{" "}
-          </tbody>
-        </Table>
+        <>
+          <Table>
+            <tbody>
+              {snacks.map(entry => (
+                <Entry key={entry._id} data={entry} delete={props.delete} />
+              ))}
+            </tbody>
+          </Table>
+          <P large>Total: {renderTotal(snacks)}</P>
+        </>
       )}
-
-      <P large>Total:{renderTotal(snacks)}</P>
     </Container>
   );
 }
