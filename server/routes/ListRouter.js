@@ -8,10 +8,7 @@ router.post("/", auth, async (req, res) => {
     const { title, mealType, calories } = req.body;
 
     // validation
-    if (!title)
-      return res
-        .status(400)
-        .json({ msg: "No food entered. Please enter a food" });
+    if (!title) return res.status(400).json({ msg: "No food entered." });
     if (!mealType)
       return res
         .status(400)

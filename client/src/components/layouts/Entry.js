@@ -10,21 +10,69 @@ const Tr = styled.tr`
   flex-direction: row;
   justify-content: flex-end;
   padding: 10px;
+  position: relative;
 `;
 
 const Td = styled.td`
   color: ${props => props.theme.textPrimary};
   text-align: ${props => (props.leftAlign ? "left" : "right")};
-  width: 25%;
+  min-width: 25%;
+`;
+
+const Input = styled.input`
+  border: 1px solid gray;
+  display: inline-block;
+  background: none;
+  color: gray;
+  text-align: center;
+  margin: 0px 5px;
+  padding: 0px 5px;
+  max-width: 70px;
+  height: 100%;
+  font-size: 16px;
+  transition: all 0.3s 0s ease-in-out;
+  border-radius: 5px;
+  :focus {
+    color: white;
+    border: 1px solid ${props => props.theme.primary};
+    -webkit-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
+    -moz-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
+    box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
+    outline: none;
+    transition: all 0.3s 0s ease-in-out;
+  }
+`;
+
+const Button = styled.button`
+  background: ${props => (props.edit === false ? "#eda509" : "#06d63e")};
+  color: black;
+  font-weight: 700;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  display: inline-block;
+  width: 70px;
+  margin-left: 10px;
+`;
+
+const EditContainer = styled.div`
+  padding: 0px 5px;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 const Cancel = styled.button`
   width: 30px;
   height: 30px;
-  background: ${props => props.theme.error};
+  background: ${props => (props.edit === true ? "gray" : props.theme.error)};
   border-radius: 30px;
   color: ${props => props.theme.textPrimary};
   padding: 0px;
+  margin: 0px auto;
+  pointer-events: ${props => (props.edit == true ? "none" : "auto")};
 `;
 
 export default function Entry(props) {
@@ -59,30 +107,35 @@ export default function Entry(props) {
     <Tr>
       {edit ? (
         <Td leftAlign>
-          <input
-            type="text"
-            value={editTitle}
-            onChange={e => setEditTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            value={editCalories}
-            onChange={e => setEditCalories(e.target.value)}
-          />
-          <button onClick={e => toggleEdit(e)}> Confirm</button>
+          <EditContainer>
+            <Input
+              type="text"
+              value={editTitle}
+              onChange={e => setEditTitle(e.target.value)}
+            />
+            <Input
+              type="text"
+              value={editCalories}
+              onChange={e => setEditCalories(e.target.value)}
+            />
+            <Button onClick={e => toggleEdit(e)}> Confirm</Button>
+          </EditContainer>
         </Td>
       ) : (
         <>
           <Td leftAlign>{editTitle}</Td>
           <Td>{editCalories} Kcal</Td>
           <Td>
-            <button onClick={e => toggleEdit(e)}> Edit</button>
+            <Button onClick={e => toggleEdit(e)} edit={edit}>
+              {" "}
+              Edit
+            </Button>
           </Td>
         </>
       )}
 
       <Td>
-        <Cancel onClick={() => props.delete(props.data._id)}>
+        <Cancel onClick={() => props.delete(props.data._id)} edit={edit}>
           <ClearIcon fontSize="small" />
         </Cancel>
       </Td>
