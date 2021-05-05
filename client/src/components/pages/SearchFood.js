@@ -10,6 +10,9 @@ import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
 
+// app id 8dd4cfd3
+// app key  6f25fb0b3ed830fbbd4fd3ffbdbeb2e7
+
 //component
 export default function SearchFood(props) {
   const { userData } = useContext(UserContext);
@@ -25,6 +28,12 @@ export default function SearchFood(props) {
   const submitForm = e => {
     e.preventDefault();
     history.push("/");
+    axios({
+      method: "get",
+      url: "https://api.edamam.com/api/food-database/v2/parser"
+    }).then(res => {
+      console.log(res);
+    });
   };
 
   return (
