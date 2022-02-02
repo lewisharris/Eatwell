@@ -9,6 +9,7 @@ import P from "../reusablecomponents/P";
 import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
+import { element } from "prop-types";
 
 // app id 8dd4cfd3
 // app key  6f25fb0b3ed830fbbd4fd3ffbdbeb2e7
@@ -17,6 +18,7 @@ import axios from "axios";
 export default function SearchFood(props) {
   const { userData } = useContext(UserContext);
   const history = useHistory();
+  const [searchData, setSearchData] = useState("");
 
   useEffect(() => {
     if (!userData.user) {
@@ -25,15 +27,20 @@ export default function SearchFood(props) {
     }
   });
 
-  const submitForm = e => {
+  const submitForm = async e => {
     e.preventDefault();
-    history.push("/");
-    axios({
-      method: "get",
-      url: "https://api.edamam.com/api/food-database/v2/parser"
-    }).then(res => {
-      console.log(res);
-    });
+    try {
+      await axios
+        .get(`http://localhost:5000/food/foodsearch?search=${searchData}`, {
+          searchData: searchData
+        })
+        .then(res => {
+          console.log(res);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+    //history.push("/");
   };
 
   return (
@@ -44,7 +51,11 @@ export default function SearchFood(props) {
         }}
       >
         <H3>Look up food</H3>
-        <Input label="Search" type="text" />
+        <Input
+          label="Search"
+          onChange={e => setSearchData(e.target.value)}
+          type="text"
+        />
         <P> some kind of drop down menu</P>
         <Input label="Weight (g)" type="text" />
         <P>display calories here</P>

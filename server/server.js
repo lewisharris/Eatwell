@@ -28,6 +28,7 @@ app.use(express.json()); //allow json parsing
 app.use("/users", require("./routes/userRouter"));
 app.use("/list", require("./routes/ListRouter"));
 app.use("/stats", require("./routes/statsRouter"));
+app.use("/food", require("./routes/foodRouter"));
 
 app.listen(port, () => {
   // listen on port for server
