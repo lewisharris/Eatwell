@@ -11,12 +11,27 @@ const Tr = styled.tr`
   justify-content: flex-end;
   padding: 10px;
   position: relative;
+  align-items: center;
 `;
 
 const Td = styled.td`
-  color: ${props => props.theme.textPrimary};
+  color: ${props => {
+    if (!props.kCal) {
+      return props.theme.textPrimary;
+    } else {
+      return props.theme.secondary;
+    }
+  }};
+  font-size: ${props => {
+    if (!props.kCal) {
+      return "16px";
+    } else {
+      return "12px";
+    }
+  }};
   text-align: ${props => (props.leftAlign ? "left" : "right")};
   min-width: 25%;
+  min-height: 20px;
 `;
 
 const Input = styled.input`
@@ -124,21 +139,20 @@ export default function Entry(props) {
       ) : (
         <>
           <Td leftAlign>{editTitle}</Td>
-          <Td>{editCalories} Kcal</Td>
+          <Td kCal>{editCalories} Kcal</Td>
           <Td>
             <Button onClick={e => toggleEdit(e)} edit={edit}>
               {" "}
               Edit
             </Button>
+          </Td>{" "}
+          <Td>
+            <Cancel onClick={() => props.delete(props.data._id)} edit={edit}>
+              <ClearIcon fontSize="small" />
+            </Cancel>
           </Td>
         </>
       )}
-
-      <Td>
-        <Cancel onClick={() => props.delete(props.data._id)} edit={edit}>
-          <ClearIcon fontSize="small" />
-        </Cancel>
-      </Td>
     </Tr>
   );
 }

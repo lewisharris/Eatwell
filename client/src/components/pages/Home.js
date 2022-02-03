@@ -10,7 +10,7 @@ import DatePicker from "../layouts/DatePicker";
 
 const Container = styled.div`
   max-width: ${props => props.theme.maxWidth};
-  margin: 0px auto;
+  margin: 0px auto 50px auto;
 `;
 
 export default function Home() {
