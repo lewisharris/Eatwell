@@ -13,6 +13,9 @@ const Container = styled.div`
   justify-content: center;
   margin: 60px auto 0px auto;
   max-width: 1000px;
+  @media (max-height: 700px) {
+    margin: 10px auto;
+  }
 `;
 
 //component

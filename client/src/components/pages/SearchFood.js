@@ -7,47 +7,95 @@ import Form from "../reusablecomponents/Form";
 import H3 from "../reusablecomponents/H3";
 import P from "../reusablecomponents/P";
 import Input from "../reusablecomponents/Input";
+import Select from "../reusablecomponents/Select";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
 import { element } from "prop-types";
+import FoodCard from "../reusablecomponents/FoodCard";
+import ScrollList from "../reusablecomponents/ScrollList";
+/*
+Search Food Component
+@ Input from user (Food search, eg. Chicken, Pasta etc)
+@ Send query to server
+@ Recieve data from Server
+@ process and send data to child List components
+@ User can add weight and component will calculate relative calories 
+@ User can add chosen food and calorie to their food list
+*/
 
-// app id 8dd4cfd3
-// app key  6f25fb0b3ed830fbbd4fd3ffbdbeb2e7
-
-//component
+// Component
 export default function SearchFood(props) {
-  const { userData } = useContext(UserContext);
   const history = useHistory();
+
+  // User data
+  const { userData } = useContext(UserContext);
+  // Form field which will send query to server
   const [searchData, setSearchData] = useState("");
+  // List of food items retrieved from server
+  const [foodList, setFoodList] = useState(null);
 
   useEffect(() => {
+    // If user is not logged in, then redirect to login page
     if (!userData.user) {
       history.push("/login");
       return;
     }
-  });
+    renderList();
+    //update every time the food list changes
+  }, foodList);
 
-  const submitForm = async e => {
-    e.preventDefault();
-    try {
-      await axios
-        .get(`http://localhost:5000/food/foodsearch?search=${searchData}`, {
-          searchData: searchData
-        })
-        .then(res => {
-          console.log(res);
-        });
-    } catch (err) {
-      console.log(err);
+  //Find current time and set default meal type
+  const calculateTime = () => {
+    const time = new Date();
+    const hour = time.getHours();
+
+    if (hour > 4 && hour < 11) {
+      return "breakfast";
+    } else if (hour >= 11 && hour < 16) {
+      return "lunch";
+    } else if (hour >= 16 && hour < 23) {
+      return "dinner";
+    } else {
+      return "snack";
     }
-    //history.push("/");
+  };
+
+  //Render list of foods
+  const renderList = () => {};
+
+  const [mealType, setMealType] = useState(calculateTime);
+
+  const submitSearch = async e => {
+    e.preventDefault();
+    // Send form field to Server as get request with query
+    await axios
+      .get(`http://localhost:5000/food/foodsearch?search=${searchData}`, {
+        searchData: searchData
+      })
+      // Set food list to data retrieved
+      .then(res => {
+        const food = res.data;
+        setFoodList(food);
+        console.log(res.data);
+      })
+      // set food list to error message
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const submitFood = () => {};
+
+  const returnToDash = e => {
+    e.preventDefault();
+    history.push("/");
   };
 
   return (
     <>
       <Form
         onSubmit={e => {
-          submitForm(e);
+          submitSearch(e);
         }}
       >
         <H3>Look up food</H3>
@@ -55,13 +103,25 @@ export default function SearchFood(props) {
           label="Search"
           onChange={e => setSearchData(e.target.value)}
           type="text"
+        />{" "}
+        <Button
+          type="submit"
+          onClick={e => submitSearch(e)}
+          text="Search Food"
         />
-        <P> some kind of drop down menu</P>
+        <P> Results</P>
+        <ScrollList foodList={foodList} ScrollList />
         <Input label="Weight (g)" type="text" />
+        <Select
+          value={mealType}
+          label="MealType"
+          type="select"
+          onChange={e => setMealType(e.target.value)}
+          options={["breakfast", "lunch", "dinner", "snack"]}
+        />
         <P>display calories here</P>
-        <Button type="submit" onClick={e => submitForm(e)} text="Add Food">
-          Add Food
-        </Button>
+        <Button type="submit" onClick={e => submitFood(e)} text="Add Food" />
+        <Button type="submit" onClick={e => returnToDash(e)} text="Done" />
       </Form>
       <AppNav />
     </>

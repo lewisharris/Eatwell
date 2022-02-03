@@ -4,6 +4,9 @@ import styled from "styled-components";
 const Container = styled.div`
   margin: 20px;
   max-width: 75%;
+  @media (max-height: 700px) {
+    margin: 5px auto;
+  }
 `;
 const P = styled.p`
   color: ${props => props.theme.primary};

@@ -20,8 +20,7 @@ const Circle = styled.div`
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
-  box-shadow: 0px 0px 40px ${props => props.theme.primary},
-    inset 0px 0px 40px ${props => props.theme.primary};
+
 
   }
 `;
@@ -61,8 +60,7 @@ const Overlay = styled.div`
     top: 0%;
     left: 0%;
     transform: translateY(-50%) translateX(-50%);
-    box-shadow: 0px 0px 40px ${props => props.theme.primary},
-      inset 0px 0px 40px ${props => props.theme.primary};
+
     animation: none;
   }
 `;
