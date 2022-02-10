@@ -12,6 +12,12 @@ const Tr = styled.tr`
   padding: 10px;
   position: relative;
   align-items: center;
+  border-radius: 5px;
+  margin: 4px auto;
+  background: ${props => props.theme.card};
+  -webkit-box-shadow: 3px 3px 5px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 3px 3px 5px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 5px -1px rgba(0, 0, 0, 0.3);
 `;
 
 const Td = styled.td`
@@ -75,7 +81,7 @@ const EditContainer = styled.div`
   margin: 0px auto;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 `;
 

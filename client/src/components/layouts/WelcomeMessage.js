@@ -38,7 +38,7 @@ export default function WelcomeMessage(props) {
 
   return (
     <>
-      {remainingCalories > 0 ? (
+      {remainingCalories >= 0 ? (
         <Container>
           <H5>{`Hi ${name},`}</H5>
           <P>
