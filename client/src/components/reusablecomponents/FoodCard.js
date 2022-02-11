@@ -16,9 +16,15 @@ const Container = styled.button`
 `;
 
 const FoodCard = props => {
-  const { id, food } = props;
+  const { id, food, selectFood, calories } = props;
+  const selection = { food: food, calories: calories };
   return (
-    <Container key={id}>
+    <Container
+      key={id}
+      onClick={e => {
+        selectFood(selection);
+      }}
+    >
       <P>{food}</P>
     </Container>
   );

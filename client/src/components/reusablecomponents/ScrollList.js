@@ -17,7 +17,14 @@ const ScrollList = props => {
       {foodList === null
         ? console.log("none")
         : foodList.hints.map(item => {
-            return <FoodCard food={item.food.label} id={item.food.foodId} />;
+            return (
+              <FoodCard
+                food={item.food.label}
+                calories={item.food.nutrients.ENERC_KCAL}
+                id={item.food.foodId}
+                selectFood={props.selectFood}
+              />
+            );
           })}
     </Container>
   );

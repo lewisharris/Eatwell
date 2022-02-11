@@ -33,6 +33,10 @@ export default function SearchFood(props) {
   const [searchData, setSearchData] = useState("");
   // List of food items retrieved from server
   const [foodList, setFoodList] = useState(null);
+  // List of food items retrieved from server
+  const [foodSelection, setFoodSelection] = useState({ food: "", calories: 0 });
+
+  const [weight, setWeight] = useState(100);
 
   useEffect(() => {
     // If user is not logged in, then redirect to login page
@@ -41,6 +45,7 @@ export default function SearchFood(props) {
       return;
     }
     renderList();
+    console.log(foodList);
     //update every time the food list changes
   }, foodList);
 
@@ -76,12 +81,15 @@ export default function SearchFood(props) {
       .then(res => {
         const food = res.data;
         setFoodList(food);
-        console.log(res.data);
       })
       // set food list to error message
       .catch(err => {
         console.log(err);
       });
+  };
+
+  const selectFood = choice => {
+    setFoodSelection({ food: choice.food, calories: choice.calories });
   };
 
   const submitFood = () => {};
@@ -110,8 +118,14 @@ export default function SearchFood(props) {
           text="Search Food"
         />
         <P> Results</P>
-        <ScrollList foodList={foodList} ScrollList />
-        <Input label="Weight (g)" type="text" />
+        <ScrollList foodList={foodList} selectFood={selectFood} />
+        <Input
+          label="Weight (g)"
+          type="text"
+          onChange={e => {
+            setWeight(parseInt(e.target.value));
+          }}
+        />
         <Select
           value={mealType}
           label="MealType"
@@ -119,7 +133,12 @@ export default function SearchFood(props) {
           onChange={e => setMealType(e.target.value)}
           options={["breakfast", "lunch", "dinner", "snack"]}
         />
-        <P>display calories here</P>
+        <P>
+          Calories:
+          {!foodSelection.calories
+            ? 0
+            : ` ${(foodSelection.calories * weight) / 100} Kcal`}
+        </P>
         <Button type="submit" onClick={e => submitFood(e)} text="Add Food" />
         <Button type="submit" onClick={e => returnToDash(e)} text="Done" />
       </Form>
