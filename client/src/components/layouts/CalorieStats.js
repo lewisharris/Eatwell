@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 import WelcomeMessage from "./WelcomeMessage";
 
 const Container = styled.div`

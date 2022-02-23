@@ -12,9 +12,6 @@ const Header = styled.div`
   height: 60px;
   background: ${props => props.theme.background};
   border-bottom: 2px solid ${props => props.theme.primary};
-  -webkit-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
-  -moz-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
-  box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
 `;
 
 const LogOut = styled.button`
@@ -49,11 +46,15 @@ export default function AuthButtons() {
     history.push("/");
   };
 
+  const sendHome = () => {
+    history.push("/");
+  };
+
   return (
     <>
       {userData.user ? (
         <Header>
-          <Img src={Logo} alt="EatWell" />
+          <Img src={Logo} alt="EatWell" onClick={sendHome} />
           <LogOut onClick={e => logout(e)} type="button">
             Log out
           </LogOut>

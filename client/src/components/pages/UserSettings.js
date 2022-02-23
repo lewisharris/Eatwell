@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Button from "../reusablecomponents/Button";
 import UserContext from "../../context/userContext";
 import Form from "../reusablecomponents/Form";
-import H3 from "../reusablecomponents/H3";
 import Input from "../reusablecomponents/Input";
 import AppNav from "../layouts/AppNav";
 import UserProfile from "../layouts/UserProfile";

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Button from "../reusablecomponents/Button";
 import UserContext from "../../context/userContext";
@@ -10,8 +9,6 @@ import Input from "../reusablecomponents/Input";
 import Select from "../reusablecomponents/Select";
 import AppNav from "../layouts/AppNav";
 import axios from "axios";
-import { element } from "prop-types";
-import FoodCard from "../reusablecomponents/FoodCard";
 import ScrollList from "../reusablecomponents/ScrollList";
 import ErrorNotice from "../misc/ErrorNotice";
 /*
@@ -45,7 +42,7 @@ export default function SearchFood(props) {
   //Error Message for form
   const [error, setError] = useState("");
   //weight form input
-  const [weight, setWeight] = useState(100);
+  const [weight, setWeight] = useState(null);
 
   useEffect(() => {
     // If user is not logged in, then redirect to login page
@@ -82,6 +79,10 @@ export default function SearchFood(props) {
 
   const submitSearch = async e => {
     e.preventDefault();
+    if (searchData.length === 0) {
+      setError("No Food Entered");
+      return;
+    }
     // Send form field to Server as get request with query
     await axios
       .get(`http://localhost:5000/food/foodsearch?search=${searchData}`, {
@@ -94,7 +95,7 @@ export default function SearchFood(props) {
       })
       // set food list to error message
       .catch(err => {
-        console.log(err);
+        setError("no food entered");
       });
   };
 
@@ -108,7 +109,7 @@ export default function SearchFood(props) {
       const newFood = {
         title: foodSelection.food,
         mealType,
-        calories: foodSelection.calories
+        calories: Math.floor(foodSelection.calories)
       };
       console.log(newFood);
       setMealType("breakfast");
@@ -127,7 +128,6 @@ export default function SearchFood(props) {
         setError(err.response.data.msg);
         setTimeout(() => {
           setButtonText("Add Food");
-          inputField.focus();
         }, 1500);
       }
     }
@@ -177,7 +177,7 @@ export default function SearchFood(props) {
           Calories:
           {!foodSelection.calories
             ? 0
-            : ` ${(foodSelection.calories * weight) / 100} Kcal`}
+            : ` ${Math.floor(foodSelection.calories * weight) / 100} Kcal`}
         </P>
         <Button
           type="submit"

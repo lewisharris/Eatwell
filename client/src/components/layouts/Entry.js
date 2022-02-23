@@ -107,7 +107,6 @@ export default function Entry(props) {
     e.preventDefault();
     setEdit(!edit);
     if (edit) {
-      console.log("sent data");
       const data = {
         title: editTitle,
         calories: editCalories,
@@ -120,7 +119,6 @@ export default function Entry(props) {
         .then(res => console.log("updated!"))
         .catch(err => console.log(err));
     } else {
-      console.log("edit data");
     }
   };
 

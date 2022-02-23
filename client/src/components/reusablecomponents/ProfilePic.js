@@ -18,9 +18,6 @@ const Container = styled.div`
   border-radius: 100px;
   margin: 10px auto;
 `;
-
-const Image = styled.img``;
-
 export default function ProfilePic() {
   const classes = useStyles();
   return (
