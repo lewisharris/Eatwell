@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Button from "../reusablecomponents/Button";
@@ -13,6 +13,7 @@ import axios from "axios";
 import { element } from "prop-types";
 import FoodCard from "../reusablecomponents/FoodCard";
 import ScrollList from "../reusablecomponents/ScrollList";
+import ErrorNotice from "../misc/ErrorNotice";
 /*
 Search Food Component
 @ Input from user (Food search, eg. Chicken, Pasta etc)
@@ -26,6 +27,8 @@ Search Food Component
 // Component
 export default function SearchFood(props) {
   const history = useHistory();
+  const submitBtn = useRef(null);
+  const inputField = useRef(null);
 
   // User data
   const { userData } = useContext(UserContext);
@@ -35,7 +38,13 @@ export default function SearchFood(props) {
   const [foodList, setFoodList] = useState(null);
   // List of food items retrieved from server
   const [foodSelection, setFoodSelection] = useState({ food: "", calories: 0 });
-
+  // Set Button Text
+  const [buttonText, setButtonText] = useState("Add Food");
+  //Calories
+  const [calories, setCalories] = useState("");
+  //Error Message for form
+  const [error, setError] = useState("");
+  //weight form input
   const [weight, setWeight] = useState(100);
 
   useEffect(() => {
@@ -65,10 +74,11 @@ export default function SearchFood(props) {
     }
   };
 
+  // Set time of meal
+  const [mealType, setMealType] = useState(calculateTime);
+
   //Render list of foods
   const renderList = () => {};
-
-  const [mealType, setMealType] = useState(calculateTime);
 
   const submitSearch = async e => {
     e.preventDefault();
@@ -92,7 +102,36 @@ export default function SearchFood(props) {
     setFoodSelection({ food: choice.food, calories: choice.calories });
   };
 
-  const submitFood = () => {};
+  const submitForm = async e => {
+    e.preventDefault();
+    try {
+      const newFood = {
+        title: foodSelection.food,
+        mealType,
+        calories: foodSelection.calories
+      };
+      console.log(newFood);
+      setMealType("breakfast");
+      setCalories("");
+      setError("");
+      await axios
+        .post("http://localhost:5000/list", newFood, {
+          headers: { "x-auth-token": userData.token }
+        })
+        .then(() => {
+          history.push("/");
+        });
+      setButtonText("Added!");
+    } catch (err) {
+      if (err.response.data.msg) {
+        setError(err.response.data.msg);
+        setTimeout(() => {
+          setButtonText("Add Food");
+          inputField.focus();
+        }, 1500);
+      }
+    }
+  };
 
   const returnToDash = e => {
     e.preventDefault();
@@ -111,6 +150,7 @@ export default function SearchFood(props) {
           label="Search"
           onChange={e => setSearchData(e.target.value)}
           type="text"
+          ref={inputField}
         />{" "}
         <Button
           type="submit"
@@ -139,8 +179,19 @@ export default function SearchFood(props) {
             ? 0
             : ` ${(foodSelection.calories * weight) / 100} Kcal`}
         </P>
-        <Button type="submit" onClick={e => submitFood(e)} text="Add Food" />
+        <Button
+          type="submit"
+          onClick={e => submitForm(e)}
+          text={buttonText}
+          ref={submitBtn}
+        />
         <Button type="submit" onClick={e => returnToDash(e)} text="Done" />
+        <ErrorNotice
+          message={error}
+          clearError={() => {
+            setError(undefined);
+          }}
+        />
       </Form>
       <AppNav />
     </>
