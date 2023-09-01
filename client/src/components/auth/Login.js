@@ -34,7 +34,10 @@ export default function Login() {
       if (loginUser) {
         setLoading(true);
       }
-      const loginResponse = await axios.post("/users/login", loginUser);
+      const loginResponse = await axios.post(
+        "http://localhost:5000/users/login",
+        loginUser
+      );
       setUserData({
         token: loginResponse.data.token,
         user: loginResponse.data.user

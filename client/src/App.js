@@ -22,7 +22,8 @@ function App() {
   //set context state to user
   useEffect(() => {
     const checkLogin = async () => {
-      let token = localStorage.getItem("auth-token"); //set token to equal local storage token
+      let token = localStorage.getItem("auth-token");
+      console.log(JSON.stringify(token)); //set token to equal local storage token
       if (token === null) {
         // if token doesnt exist (it wont on first load) then create it in local storage and set it to an empty string
         localStorage.setItem("auth-token", "");
@@ -30,12 +31,12 @@ function App() {
       }
       //send token to back end
       const tokenResponse = await axios.post(
-        "http:/localhost:5000/users/tokenisvalid",
+        "http://localhost:5000/users/tokenisvalid/",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenResponse.data) {
-        const userResponse = await axios.get("http:/localhost:5000/users/", {
+        const userResponse = await axios.get("http://localhost:5000/users/", {
           headers: { "x-auth-token": token }
         });
         setUserData({ token, user: userResponse.data });

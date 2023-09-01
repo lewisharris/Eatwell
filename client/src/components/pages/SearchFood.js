@@ -111,7 +111,6 @@ export default function SearchFood(props) {
         mealType,
         calories: Math.floor(foodSelection.calories)
       };
-      console.log(newFood);
       setMealType("breakfast");
       setCalories("");
       setError("");

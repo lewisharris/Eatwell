@@ -37,6 +37,7 @@ const Td = styled.td`
   }};
   text-align: ${props => (props.leftAlign ? "left" : "right")};
   min-width: 25%;
+  align-items: center;
   min-height: 20px;
 `;
 

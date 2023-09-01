@@ -49,7 +49,7 @@ export default function Register() {
       if (newUser) {
         setLoading(true);
       }
-      await axios.post("/users/register", newUser);
+      await axios.post("http://localhost:5000/users/register", newUser);
 
       //log new user in
       const loginResponse = await axios.post("/users/login", {
