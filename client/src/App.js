@@ -17,7 +17,7 @@ import SearchFood from "./components/pages/SearchFood";
 function App() {
   const [userData, setUserData] = useState({
     token: undefined,
-    user: undefined
+    user: undefined,
   });
   //set context state to user
   useEffect(() => {
@@ -31,14 +31,17 @@ function App() {
       }
       //send token to back end
       const tokenResponse = await axios.post(
-        "http://localhost:5000/users/tokenisvalid/",
+        "https://eatwell-bve3.vercel.app/users/tokenisvalid/",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenResponse.data) {
-        const userResponse = await axios.get("http://localhost:5000/users/", {
-          headers: { "x-auth-token": token }
-        });
+        const userResponse = await axios.get(
+          "https://eatwell-bve3.vercel.app/users/",
+          {
+            headers: { "x-auth-token": token },
+          }
+        );
         setUserData({ token, user: userResponse.data });
       }
     };

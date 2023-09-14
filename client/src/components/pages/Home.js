@@ -9,7 +9,7 @@ import AppNav from "../layouts/AppNav";
 import DatePicker from "../layouts/DatePicker";
 
 const Container = styled.div`
-  max-width: ${props => props.theme.maxWidth};
+  max-width: ${(props) => props.theme.maxWidth};
   margin: 0px auto 50px auto;
 `;
 
@@ -28,36 +28,36 @@ export default function Home() {
 
   async function getFood() {
     await axios
-      .get("http://localhost:5000/list/all", {
-        headers: { "x-auth-token": userData.token }
+      .get("https://eatwell-bve3.vercel.app/list/all", {
+        headers: { "x-auth-token": userData.token },
       })
-      .then(res => {
+      .then((res) => {
         setListData(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
   async function removeFood(id) {
     await axios
-      .delete(`http://localhost:5000/list/${id}`, {
-        headers: { "x-auth-token": userData.token }
+      .delete(`https://eatwell-bve3.vercel.app/list/${id}`, {
+        headers: { "x-auth-token": userData.token },
       })
       .then(() => {
         getFood();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
   const setTargetCalories = async () => {
     await axios
-      .get(`http://localhost:5000/stats/${userData.id}`, {
-        headers: { "x-auth-token": userData.token }
+      .get(`https://eatwell-bve3.vercel.app/${userData.id}`, {
+        headers: { "x-auth-token": userData.token },
       })
-      .then(res => {
+      .then((res) => {
         const cal = res.data.length === 0 ? 2000 : res.data[0].targetCalories;
         setTargetCal(cal);
       });

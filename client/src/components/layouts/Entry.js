@@ -14,28 +14,28 @@ const Tr = styled.tr`
   align-items: center;
   border-radius: 5px;
   margin: 4px auto;
-  background: ${props => props.theme.card};
+  background: ${(props) => props.theme.card};
   -webkit-box-shadow: 3px 3px 5px -1px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 3px 3px 5px -1px rgba(0, 0, 0, 0.3);
   box-shadow: 3px 3px 5px -1px rgba(0, 0, 0, 0.3);
 `;
 
 const Td = styled.td`
-  color: ${props => {
+  color: ${(props) => {
     if (!props.kCal) {
       return props.theme.textPrimary;
     } else {
       return props.theme.secondary;
     }
   }};
-  font-size: ${props => {
+  font-size: ${(props) => {
     if (!props.kCal) {
       return "16px";
     } else {
       return "12px";
     }
   }};
-  text-align: ${props => (props.leftAlign ? "left" : "right")};
+  text-align: ${(props) => (props.leftAlign ? "left" : "right")};
   min-width: 25%;
   align-items: center;
   min-height: 20px;
@@ -56,17 +56,17 @@ const Input = styled.input`
   border-radius: 5px;
   :focus {
     color: white;
-    border: 1px solid ${props => props.theme.primary};
-    -webkit-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
-    -moz-box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
-    box-shadow: 0px 0px 10px 0px ${props => props.theme.primary};
+    border: 1px solid ${(props) => props.theme.primary};
+    -webkit-box-shadow: 0px 0px 10px 0px ${(props) => props.theme.primary};
+    -moz-box-shadow: 0px 0px 10px 0px ${(props) => props.theme.primary};
+    box-shadow: 0px 0px 10px 0px ${(props) => props.theme.primary};
     outline: none;
     transition: all 0.3s 0s ease-in-out;
   }
 `;
 
 const Button = styled.button`
-  background: ${props => (props.edit === false ? "#eda509" : "#06d63e")};
+  background: ${(props) => (props.edit === false ? "#eda509" : "#06d63e")};
   color: black;
   font-weight: 700;
   border: none;
@@ -89,12 +89,12 @@ const EditContainer = styled.div`
 const Cancel = styled.button`
   width: 30px;
   height: 30px;
-  background: ${props => (props.edit === true ? "gray" : props.theme.error)};
+  background: ${(props) => (props.edit === true ? "gray" : props.theme.error)};
   border-radius: 30px;
-  color: ${props => props.theme.textPrimary};
+  color: ${(props) => props.theme.textPrimary};
   padding: 0px;
   margin: 0px auto;
-  pointer-events: ${props => (props.edit == true ? "none" : "auto")};
+  pointer-events: ${(props) => (props.edit == true ? "none" : "auto")};
 `;
 
 export default function Entry(props) {
@@ -104,21 +104,21 @@ export default function Entry(props) {
   const [editCalories, setEditCalories] = useState(calories);
   const [edit, setEdit] = useState(false);
 
-  const toggleEdit = e => {
+  const toggleEdit = (e) => {
     e.preventDefault();
     setEdit(!edit);
     if (edit) {
       const data = {
         title: editTitle,
         calories: editCalories,
-        mealType: mealType
+        mealType: mealType,
       };
       axios
-        .put(`http://localhost:5000/list/update/${_id}`, data, {
-          headers: { "x-auth-token": userData.token }
+        .put(`https://eatwell-bve3.vercel.app/list/update/${_id}`, data, {
+          headers: { "x-auth-token": userData.token },
         })
-        .then(res => console.log("updated!"))
-        .catch(err => console.log(err));
+        .then((res) => console.log("updated!"))
+        .catch((err) => console.log(err));
     } else {
     }
   };
@@ -131,14 +131,14 @@ export default function Entry(props) {
             <Input
               type="text"
               value={editTitle}
-              onChange={e => setEditTitle(e.target.value)}
+              onChange={(e) => setEditTitle(e.target.value)}
             />
             <Input
               type="text"
               value={editCalories}
-              onChange={e => setEditCalories(e.target.value)}
+              onChange={(e) => setEditCalories(e.target.value)}
             />
-            <Button onClick={e => toggleEdit(e)}> Confirm</Button>
+            <Button onClick={(e) => toggleEdit(e)}> Confirm</Button>
           </EditContainer>
         </Td>
       ) : (
@@ -146,7 +146,7 @@ export default function Entry(props) {
           <Td leftAlign>{editTitle}</Td>
           <Td kCal>{editCalories} Kcal</Td>
           <Td>
-            <Button onClick={e => toggleEdit(e)} edit={edit}>
+            <Button onClick={(e) => toggleEdit(e)} edit={edit}>
               {" "}
               Edit
             </Button>

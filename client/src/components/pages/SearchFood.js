@@ -77,7 +77,7 @@ export default function SearchFood(props) {
   //Render list of foods
   const renderList = () => {};
 
-  const submitSearch = async e => {
+  const submitSearch = async (e) => {
     e.preventDefault();
     if (searchData.length === 0) {
       setError("No Food Entered");
@@ -85,38 +85,41 @@ export default function SearchFood(props) {
     }
     // Send form field to Server as get request with query
     await axios
-      .get(`http://localhost:5000/food/foodsearch?search=${searchData}`, {
-        searchData: searchData
-      })
+      .get(
+        `https://eatwell-bve3.vercel.app/food/foodsearch?search=${searchData}`,
+        {
+          searchData: searchData,
+        }
+      )
       // Set food list to data retrieved
-      .then(res => {
+      .then((res) => {
         const food = res.data;
         setFoodList(food);
       })
       // set food list to error message
-      .catch(err => {
+      .catch((err) => {
         setError("no food entered");
       });
   };
 
-  const selectFood = choice => {
+  const selectFood = (choice) => {
     setFoodSelection({ food: choice.food, calories: choice.calories });
   };
 
-  const submitForm = async e => {
+  const submitForm = async (e) => {
     e.preventDefault();
     try {
       const newFood = {
         title: foodSelection.food,
         mealType,
-        calories: Math.floor(foodSelection.calories)
+        calories: Math.floor(foodSelection.calories),
       };
       setMealType("breakfast");
       setCalories("");
       setError("");
       await axios
-        .post("http://localhost:5000/list", newFood, {
-          headers: { "x-auth-token": userData.token }
+        .post("https://eatwell-bve3.vercel.app/list", newFood, {
+          headers: { "x-auth-token": userData.token },
         })
         .then(() => {
           history.push("/");
@@ -132,7 +135,7 @@ export default function SearchFood(props) {
     }
   };
 
-  const returnToDash = e => {
+  const returnToDash = (e) => {
     e.preventDefault();
     history.push("/");
   };
@@ -140,20 +143,20 @@ export default function SearchFood(props) {
   return (
     <>
       <Form
-        onSubmit={e => {
+        onSubmit={(e) => {
           submitSearch(e);
         }}
       >
         <H3>Look up food</H3>
         <Input
           label="Search"
-          onChange={e => setSearchData(e.target.value)}
+          onChange={(e) => setSearchData(e.target.value)}
           type="text"
           ref={inputField}
         />{" "}
         <Button
           type="submit"
-          onClick={e => submitSearch(e)}
+          onClick={(e) => submitSearch(e)}
           text="Search Food"
         />
         <P> Results</P>
@@ -161,7 +164,7 @@ export default function SearchFood(props) {
         <Input
           label="Weight (g)"
           type="text"
-          onChange={e => {
+          onChange={(e) => {
             setWeight(parseInt(e.target.value));
           }}
         />
@@ -169,7 +172,7 @@ export default function SearchFood(props) {
           value={mealType}
           label="MealType"
           type="select"
-          onChange={e => setMealType(e.target.value)}
+          onChange={(e) => setMealType(e.target.value)}
           options={["breakfast", "lunch", "dinner", "snack"]}
         />
         <P>
@@ -180,11 +183,11 @@ export default function SearchFood(props) {
         </P>
         <Button
           type="submit"
-          onClick={e => submitForm(e)}
+          onClick={(e) => submitForm(e)}
           text={buttonText}
           ref={submitBtn}
         />
-        <Button type="submit" onClick={e => returnToDash(e)} text="Done" />
+        <Button type="submit" onClick={(e) => returnToDash(e)} text="Done" />
         <ErrorNotice
           message={error}
           clearError={() => {

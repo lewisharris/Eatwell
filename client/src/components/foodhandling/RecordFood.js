@@ -48,20 +48,20 @@ export default function RecordFood(props) {
 
   const [mealType, setMealType] = useState(calculateTime);
 
-  const submitForm = async e => {
+  const submitForm = async (e) => {
     e.preventDefault();
     try {
       const newFood = {
         title,
         mealType,
-        calories
+        calories,
       };
       setMealType("breakfast");
       setCalories("");
       setError("");
       await axios
-        .post("http://localhost:5000/list", newFood, {
-          headers: { "x-auth-token": userData.token }
+        .post("https://eatwell-bve3.vercel.app/list", newFood, {
+          headers: { "x-auth-token": userData.token },
         })
         .then(() => {
           history.push("/");
@@ -80,20 +80,20 @@ export default function RecordFood(props) {
         <Input
           label="Meal/Food*"
           type="text"
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
 
         <Select
           value={mealType}
           label="MealType"
           type="select"
-          onChange={e => setMealType(e.target.value)}
+          onChange={(e) => setMealType(e.target.value)}
           options={["breakfast", "lunch", "dinner", "snack"]}
         />
         <Input
           label="Calories*"
           type="text"
-          onChange={e => setCalories(e.target.value)}
+          onChange={(e) => setCalories(e.target.value)}
         />
         <Button type="submit" onClick={submitForm} text="Add" />
         <ErrorNotice

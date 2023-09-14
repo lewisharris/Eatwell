@@ -36,7 +36,7 @@ export default function Register() {
     }
   };
 
-  const submitForm = async e => {
+  const submitForm = async (e) => {
     e.preventDefault();
     try {
       // create new user
@@ -44,21 +44,24 @@ export default function Register() {
         email,
         password,
         passwordCheck,
-        username
+        username,
       };
       if (newUser) {
         setLoading(true);
       }
-      await axios.post("http://localhost:5000/users/register", newUser);
+      await axios.post(
+        "https://eatwell-bve3.vercel.app/users/register",
+        newUser
+      );
 
       //log new user in
       const loginResponse = await axios.post("/users/login", {
         email,
-        password
+        password,
       });
       await setUserData({
         token: loginResponse.data.token,
-        user: loginResponse.data.user
+        user: loginResponse.data.user,
       });
 
       localStorage.setItem("auth-token", loginResponse.data.token);
@@ -95,34 +98,34 @@ export default function Register() {
             label="Email*"
             type="email"
             name="email"
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
             label="Password*"
             name="password"
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
 
           <Input
             label="Verify Password*"
             name="password-confirm"
-            onChange={e => setPasswordCheck(e.target.value)}
+            onChange={(e) => setPasswordCheck(e.target.value)}
             type="password"
           />
           <Input
             label="Username*"
             type="text"
             name="username"
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
-          <Button type="submit" text="Register" onClick={e => submitForm(e)}>
+          <Button type="submit" text="Register" onClick={(e) => submitForm(e)}>
             Register
           </Button>
           <ErrorNotice
             message={error}
-            clearError={e => {
+            clearError={(e) => {
               e.preventDefault();
               setError(undefined);
             }}

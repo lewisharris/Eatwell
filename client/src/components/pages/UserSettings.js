@@ -38,42 +38,42 @@ export default function UserSettings(props) {
   const getUserStats = () => {
     const userId = userData.user.id;
     axios
-      .get(`http://localhost:5000/stats/${userId}`, {
-        headers: { "x-auth-token": userData.token }
+      .get(`https://eatwell-bve3.vercel.app/stats/${userId}`, {
+        headers: { "x-auth-token": userData.token },
       })
-      .then(res => {
+      .then((res) => {
         setStats(res.data[0]);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
-  const submitForm = e => {
+  const submitForm = (e) => {
     e.preventDefault();
     const userId = userData.user.id;
     const userStats = {
       height,
       weight,
-      calories
+      calories,
     };
     axios
       .put(
-        `http://localhost:5000/stats/update/${userId}`,
+        `https://eatwell-bve3.vercel.app/stats/update/${userId}`,
         {
           height: userStats.height,
           weight: userStats.weight,
-          targetCalories: userStats.calories
+          targetCalories: userStats.calories,
         },
         { headers: { "x-auth-token": userData.token } }
       )
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
     history.push("/");
   };
   return (
     <InputPages>
       <UserProfile height={height} weight={weight} calories={calories} />
       <Form
-        onSubmit={e => {
+        onSubmit={(e) => {
           submitForm(e);
         }}
       >
@@ -84,7 +84,7 @@ export default function UserSettings(props) {
           type="number"
           value={height}
           name="height"
-          onChange={e => setHeight(e.target.value)}
+          onChange={(e) => setHeight(e.target.value)}
         />
         <Input
           inactive
@@ -92,7 +92,7 @@ export default function UserSettings(props) {
           placeholder={"Enter Weight"}
           type="number"
           value={weight}
-          onChange={e => setWeight(e.target.value)}
+          onChange={(e) => setWeight(e.target.value)}
         />
         <Input
           inactive
@@ -100,9 +100,9 @@ export default function UserSettings(props) {
           type="number"
           value={calories}
           placeholder={"Enter Calories"}
-          onChange={e => setCalories(e.target.value)}
+          onChange={(e) => setCalories(e.target.value)}
         />
-        <Button type="submit" onClick={e => submitForm(e)} text="Update" />
+        <Button type="submit" onClick={(e) => submitForm(e)} text="Update" />
       </Form>
       <AppNav />
     </InputPages>

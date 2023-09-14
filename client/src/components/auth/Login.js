@@ -24,23 +24,23 @@ export default function Login() {
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
-  const submitForm = async e => {
+  const submitForm = async (e) => {
     try {
       e.preventDefault();
       const loginUser = {
         email,
-        password
+        password,
       };
       if (loginUser) {
         setLoading(true);
       }
       const loginResponse = await axios.post(
-        "http://localhost:5000/users/login",
+        "https://eatwell-bve3.vercel.app/users/login",
         loginUser
       );
       setUserData({
         token: loginResponse.data.token,
-        user: loginResponse.data.user
+        user: loginResponse.data.user,
       });
       localStorage.setItem("auth-token", loginResponse.data.token);
       history.push("/");
@@ -86,13 +86,13 @@ export default function Login() {
             label="Email"
             type="email"
             name="email"
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
             label="Password"
             name="password"
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             type="text"
           />
 
@@ -101,7 +101,7 @@ export default function Login() {
           </Button>
           <ErrorNotice
             message={error}
-            clearError={e => {
+            clearError={(e) => {
               e.preventDefault();
               setError(undefined);
             }}
