@@ -12,18 +12,7 @@
       "dest": "./client/src/index.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
-        "Access-Control-Allow-Headers": [
-          "append",
-          "delete",
-          "entries",
-          "foreach",
-          "get",
-          "has",
-          "keys",
-          "set",
-          "values",
-          "Authorization"
-        ]
+        "Access-Control-Allow-Headers": "Authorization"
       }
     }
   ]
