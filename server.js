@@ -15,7 +15,7 @@ mongoose.connect(uri, {
   // connect to mongoDB via mongoose
   useNewUrlParser: true, // clear node depreciation errors
   useCreateIndex: true, // clear node depreciation errors
-  useUnifiedTopology: true // clear node depreciation errors
+  useUnifiedTopology: true, // clear node depreciation errors
 });
 const connection = mongoose.connection; // Once connected via mongoose, log connnection to console
 connection.once("open", () => {
@@ -31,7 +31,12 @@ app.use("/list", require("./routes/ListRouter"));
 app.use("/stats", require("./routes/statsRouter"));
 app.use("/food", require("./routes/foodRouter"));
 //Serve static assets if in production
-app.use(express.static(path.join(__dirname, "client", "build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  );
+}
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
@@ -40,3 +45,5 @@ app.listen(port, () => {
   // listen on port for server
   console.log(`server is running on port:${port}`);
 });
+
+// app.use(express.static(path.join(__dirname, "client", "build")));
