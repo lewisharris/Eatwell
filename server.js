@@ -25,7 +25,7 @@ connection.once("open", () => {
 //middleware
 app.use(
   cors({
-    origin: ["https://eatwell-frontend.vercel.app"],
+    origin: "https://eatwell-frontend.vercel.app/users/login",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
