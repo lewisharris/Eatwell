@@ -86,7 +86,7 @@ export default function SearchFood(props) {
     // Send form field to Server as get request with query
     await axios
       .get(
-        `https://eatwell-bve3.vercel.app/food/foodsearch?search=${searchData}`,
+        `https://eatwell-virid.vercel.app/food/foodsearch?search=${searchData}`,
         {
           searchData: searchData,
         }
@@ -118,7 +118,7 @@ export default function SearchFood(props) {
       setCalories("");
       setError("");
       await axios
-        .post("https://eatwell-bve3.vercel.app/list", newFood, {
+        .post("https://eatwell-virid.vercel.app/list", newFood, {
           headers: { "x-auth-token": userData.token },
         })
         .then(() => {

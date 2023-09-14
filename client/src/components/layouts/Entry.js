@@ -114,7 +114,7 @@ export default function Entry(props) {
         mealType: mealType,
       };
       axios
-        .put(`https://eatwell-bve3.vercel.app/list/update/${_id}`, data, {
+        .put(`https://eatwell-virid.vercel.app/list/update/${_id}`, data, {
           headers: { "x-auth-token": userData.token },
         })
         .then((res) => console.log("updated!"))

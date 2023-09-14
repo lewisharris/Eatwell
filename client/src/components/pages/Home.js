@@ -54,7 +54,7 @@ export default function Home() {
 
   const setTargetCalories = async () => {
     await axios
-      .get(`https://eatwell-bve3.vercel.app/${userData.id}`, {
+      .get(`https://eatwell-virid.vercel.app/${userData.id}`, {
         headers: { "x-auth-token": userData.token },
       })
       .then((res) => {

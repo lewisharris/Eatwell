@@ -35,7 +35,7 @@ export default function Login() {
         setLoading(true);
       }
       const loginResponse = await axios.post(
-        "https://eatwell-bve3.vercel.app/users/login",
+        "https://https://eatwell-virid.vercel.app/users/login",
         loginUser
       );
       setUserData({

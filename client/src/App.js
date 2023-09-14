@@ -31,13 +31,13 @@ function App() {
       }
       //send token to back end
       const tokenResponse = await axios.post(
-        "https://eatwell-bve3.vercel.app/users/tokenisvalid/",
+        "https://eatwell-virid.vercel.app/users/tokenisvalid/",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenResponse.data) {
         const userResponse = await axios.get(
-          "https://eatwell-bve3.vercel.app/users/",
+          "https://https://eatwell-virid.vercel.app//users/",
           {
             headers: { "x-auth-token": token },
           }

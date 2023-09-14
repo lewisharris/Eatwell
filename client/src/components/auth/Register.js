@@ -50,7 +50,7 @@ export default function Register() {
         setLoading(true);
       }
       await axios.post(
-        "https://eatwell-bve3.vercel.app/users/register",
+        "https://https://eatwell-virid.vercel.app/users/register",
         newUser
       );
 

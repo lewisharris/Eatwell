@@ -60,7 +60,7 @@ export default function RecordFood(props) {
       setCalories("");
       setError("");
       await axios
-        .post("https://eatwell-bve3.vercel.app/list", newFood, {
+        .post("https://eatwell-virid.vercel.app/list", newFood, {
           headers: { "x-auth-token": userData.token },
         })
         .then(() => {
