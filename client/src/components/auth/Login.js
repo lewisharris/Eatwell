@@ -35,14 +35,14 @@ export default function Login() {
         setLoading(true);
       }
       const loginResponse = await axios.post(
-        "https://https://eatwell-virid.vercel.app/users/login",
+        "https://eatwell-virid.vercel.app/users/login",
         loginUser
       );
       setUserData({
         token: loginResponse.data.token,
         user: loginResponse.data.user,
       });
-      localStorage.setItem("auth-token", loginResponse.data.token);
+      localStorage.setItem("auth-token", loginResponse.data?.token);
       history.push("/");
     } catch (err) {
       if (err.response.data.msg) {
