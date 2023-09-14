@@ -47,7 +47,6 @@ function App() {
     };
     checkLogin();
   }, []);
-
   return (
     <>
       <BrowserRouter>
