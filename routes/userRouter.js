@@ -49,7 +49,6 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
     //validation - check all required fields have been entered
     if (!email || !password) {
       return res.status(400).json({ msg: "Not all fields are entered" });
@@ -74,8 +73,8 @@ router.post("/login", async (req, res) => {
         username: user.username,
         height: user.height,
         weight: user.weight,
-        targetCalories: user.targetCalories
-      }
+        targetCalories: user.targetCalories,
+      },
     });
   } catch (err) {
     res.status(500).json({ error: err.msg });
@@ -126,7 +125,7 @@ router.get("/user/:id", auth, async (req, res) => {
 
 //update user route
 router.post("/update/:id", auth, async (req, res) => {
-  User.findById(req.params.id).then(user => {
+  User.findById(req.params.id).then((user) => {
     user.username = req.body.username;
     user.height = req.body.height;
     user.weight = req.body.weight;
@@ -137,7 +136,7 @@ router.post("/update/:id", auth, async (req, res) => {
       .then(() => {
         res.json({ msg: "user updated" });
       })
-      .catch(err => res.status(500).json({ msg: err.msg }));
+      .catch((err) => res.status(500).json({ msg: err.msg }));
   });
 });
 
