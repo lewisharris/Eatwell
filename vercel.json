@@ -2,26 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "./index.js",
+      "src": "src/app.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": ".*",
-      "methods": ["GET", "POST", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-        "Access-Control-Allow-Credentials": "true"
-      },
-      "dest": "index.js",
-      "continue": true
-    },
-    {
-      "src": "/users/login",
-      "methods": ["POST"],
-      "dest": "index.js"
+      "src": "/(.*)",
+      "dest": "src/app.ts",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
     }
   ]
 }
