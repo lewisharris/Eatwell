@@ -8,7 +8,12 @@
   ],
   "routes": [
     {
-      "src": "https://eatwell-frontend.vercel.app/(.*)",
+      "src": [
+        "https://eatwell-frontend.vercel.app/(.*)",
+        "https://eatwell-frontend.vercel.app/login",
+        "https://eatwell-frontend.vercel.app/register",
+        "https://eatwell-frontend.vercel.app/token-is-valid"
+      ],
       "dest": "./index.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
