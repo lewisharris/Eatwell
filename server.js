@@ -24,6 +24,7 @@ connection.once("open", () => {
 
 //middleware
 app.use(cors()); //allow cors
+app.options("*", cors());
 app.use(express.json()); //allow json parsing
 //routes
 app.use("/users", require("./routes/userRouter"));
