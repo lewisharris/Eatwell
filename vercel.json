@@ -12,7 +12,7 @@
       "dest": "./client/src/index.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
-        "Access-Control-Allow-Headers": "Authorization"
+        "Access-Control-Allow-Origin": "*"
       }
     }
   ]
