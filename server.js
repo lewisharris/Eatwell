@@ -23,7 +23,13 @@ connection.once("open", () => {
 });
 
 //middleware
-app.use(cors()); //allow cors
+app.use(
+  cors({
+    origin: ["https://eatwell-frontend.vercel.app/"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+); //allow cors
 app.use(express.json()); //allow json parsing
 //routes
 app.use("/users", require("./routes/userRouter"));
