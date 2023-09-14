@@ -14,6 +14,8 @@ import theme from "./theme/theme";
 import RecordFood from "./components/foodhandling/RecordFood";
 import SearchFood from "./components/pages/SearchFood";
 
+// Root App
+
 function App() {
   const [userData, setUserData] = useState({
     token: undefined,

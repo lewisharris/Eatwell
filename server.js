@@ -6,7 +6,6 @@ const path = require("path");
 require("dotenv").config(); // environment variable config file
 
 //express set up
-
 const app = express(); // creates express server
 const port = process.env.PORT || 5000; //finds if not then use local port
 
@@ -48,12 +47,14 @@ app.use("/users", require("./routes/userRouter"));
 app.use("/list", require("./routes/ListRouter"));
 app.use("/stats", require("./routes/statsRouter"));
 app.use("/food", require("./routes/foodRouter"));
-//Serve static assets if in production
+
+//Serve static assets if in production..
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
+
 app.listen(port, () => {
   // listen on port for server
   console.log(`server is running on port:${port}`);
