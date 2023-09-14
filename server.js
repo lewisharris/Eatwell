@@ -37,6 +37,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+
 app.options("/*", (_, res) => {
   res.sendStatus(200);
 });
