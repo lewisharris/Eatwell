@@ -31,12 +31,7 @@ app.use("/list", require("./routes/ListRouter"));
 app.use("/stats", require("./routes/statsRouter"));
 app.use("/food", require("./routes/foodRouter"));
 //Serve static assets if in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-  );
-}
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
@@ -45,5 +40,3 @@ app.listen(port, () => {
   // listen on port for server
   console.log(`server is running on port:${port}`);
 });
-
-// app.use(express.static(path.join(__dirname, "client", "build")));
