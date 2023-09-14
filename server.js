@@ -6,6 +6,7 @@ const path = require("path");
 require("dotenv").config(); // environment variable config file
 
 //express set up
+
 const app = express(); // creates express server
 const port = process.env.PORT || 5000; //finds if not then use local port
 
