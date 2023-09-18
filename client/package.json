@@ -14,12 +14,13 @@
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-scripts": "^5.0.1",
     "react-weekly-day-picker": "^1.0.3",
     "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "npm start",
-    "build": "npm run build",
+    "build": "react-scripts build",
     "test": "npm test",
     "eject": "npm eject"
   },
