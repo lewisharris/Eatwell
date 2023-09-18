@@ -23,8 +23,9 @@ connection.once("open", () => {
 });
 
 //middleware
-app.use(cors({ origin: "*", credentials: true })); //allow cors
-app.options("*", cors());
+app.use(
+  cors({ origin: "https://eatwell-yi7a.onrender.com", credentials: true })
+); //allow cors
 
 app.use(express.json()); //allow json parsing
 //routes
