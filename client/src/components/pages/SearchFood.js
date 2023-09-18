@@ -86,7 +86,7 @@ export default function SearchFood(props) {
     // Send form field to Server as get request with query
     await axios
       .get(
-        `https://api.edamam.com/api/food-database/v2/parser/food/foodsearch?search=${searchData}`,
+        `https://eatwell-back-end.onrender.com/food/foodsearch?search=${searchData}`,
         {
           searchData: searchData,
         }
