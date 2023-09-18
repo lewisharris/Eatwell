@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
     }
     //if all credentials have passed validation then access new web token
     const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.json({
+    res.status(200).json({
       token,
       user: {
         id: user._id,
