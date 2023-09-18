@@ -25,7 +25,6 @@ export default function Login() {
   const history = useHistory();
 
   const submitForm = async (e) => {
-    console.log("started");
     try {
       e.preventDefault();
       const loginUser = {
@@ -40,20 +39,21 @@ export default function Login() {
         loginUser
       );
       setUserData({
-        token: loginResponse.data.token,
-        user: loginResponse.data.user,
+        token: await loginResponse.data.token,
+        user: await loginResponse.data.user,
       });
-      localStorage.setItem("auth-token", loginResponse.data?.token);
+      localStorage.setItem(
+        "auth-token",
+        JSON.stringify(loginResponse.data?.token)
+      );
+      console.log(JSON.stringify(localStorage + "Local storage")); //set token to equal local storage token
       history.push("/");
-      console.log("completed");
     } catch (err) {
       if (err.response.data.msg) {
         setLoading(false);
         setError(err.response.data.msg);
-        console.log("error logged");
       }
     }
-    console.log("everything failed");
   };
 
   const getViewport = () => {
