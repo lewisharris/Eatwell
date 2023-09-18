@@ -25,9 +25,6 @@ connection.once("open", () => {
 //middleware
 app.use(cors({ origin: "*", credentials: true })); //allow cors
 app.options("*", cors());
-app.options("/*", (_, res) => {
-  res.sendStatus(200);
-});
 
 app.use(express.json()); //allow json parsing
 //routes
