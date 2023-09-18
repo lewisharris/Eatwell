@@ -28,7 +28,7 @@ export default function Home() {
 
   async function getFood() {
     await axios
-      .get("https://eatwell-bve3.vercel.app/list/all", {
+      .get("https://eatwell-back-end.onrender.com/list/all", {
         headers: { "x-auth-token": userData.token },
       })
       .then((res) => {
@@ -41,7 +41,7 @@ export default function Home() {
 
   async function removeFood(id) {
     await axios
-      .delete(`https://eatwell-bve3.vercel.app/list/${id}`, {
+      .delete(`https://eatwell-back-end.onrender.com/list/${id}`, {
         headers: { "x-auth-token": userData.token },
       })
       .then(() => {
@@ -54,7 +54,7 @@ export default function Home() {
 
   const setTargetCalories = async () => {
     await axios
-      .get(`https://eatwell-virid.vercel.app/${userData.id}`, {
+      .get(`https://eatwell-back-end.onrender.com/${userData.id}`, {
         headers: { "x-auth-token": userData.token },
       })
       .then((res) => {

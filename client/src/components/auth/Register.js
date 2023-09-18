@@ -50,13 +50,13 @@ export default function Register() {
         setLoading(true);
       }
       await axios.post(
-        "https://eatwell-virid.vercel.app/users/register",
+        "https://eatwell-back-end.onrender.com/users/register",
         newUser
       );
 
       //log new user in
       const loginResponse = await axios.post(
-        "https://eatwell-virid.vercel.app/users/register",
+        "https://eatwell-back-end.onrender.com/users/register",
         {
           email,
           password,

@@ -38,7 +38,7 @@ export default function UserSettings(props) {
   const getUserStats = () => {
     const userId = userData.user.id;
     axios
-      .get(`https://eatwell-virid.vercel.app/stats/${userId}`, {
+      .get(`https://eatwell-back-end.onrender.com/stats/${userId}`, {
         headers: { "x-auth-token": userData.token },
       })
       .then((res) => {
@@ -57,7 +57,7 @@ export default function UserSettings(props) {
     };
     axios
       .put(
-        `https://eatwell-virid.vercel.app/stats/update/${userId}`,
+        `https://eatwell-back-end.onrender.com/stats/update/${userId}`,
         {
           height: userStats.height,
           weight: userStats.weight,
