@@ -55,10 +55,13 @@ export default function Register() {
       );
 
       //log new user in
-      const loginResponse = await axios.post("/users/login", {
-        email,
-        password,
-      });
+      const loginResponse = await axios.post(
+        "https://eatwell-virid.vercel.app/users/register",
+        {
+          email,
+          password,
+        }
+      );
       await setUserData({
         token: loginResponse.data.token,
         user: loginResponse.data.user,
