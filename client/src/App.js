@@ -39,7 +39,7 @@ function App() {
       );
       if (tokenResponse.data) {
         const userResponse = await axios.get(
-          "https://https://eatwell-virid.vercel.app//users/",
+          "https://https://eatwell-virid.vercel.app/users/",
           {
             headers: { "x-auth-token": token },
           }
