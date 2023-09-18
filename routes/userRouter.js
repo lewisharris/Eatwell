@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
 });
 
 //login route
-router.get("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     //validation - check all required fields have been entered
