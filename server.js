@@ -34,9 +34,6 @@ app.use("/list", require("./routes/ListRouter"));
 app.use("/stats", require("./routes/statsRouter"));
 app.use("/food", require("./routes/foodRouter"));
 
-//Serve static assets if in production..
-app.use(express.static(path.join(__dirname, "client", "build")));
-
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
