@@ -12,11 +12,8 @@
       "dest": "./server.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Methods": "*"
-      },
-      "status": 200
+        "Access-Control-Allow-Origin": "*"
+      }
     }
   ]
 }
