@@ -110,10 +110,10 @@ export default function Login() {
               setError(undefined);
             }}
           />
-          <div onClick={goToRegister}>
+          <button onClick={goToRegister}>
             <P>Not yet registered?</P>
             <P>Sign up </P>
-          </div>
+          </button>
         </Form>
       </AuthFormContainer>
     </AuthPageBg>
