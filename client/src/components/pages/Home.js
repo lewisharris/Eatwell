@@ -54,7 +54,7 @@ export default function Home() {
 
   const setTargetCalories = async () => {
     await axios
-      .get(`https://eatwell-back-end.onrender.com/users/${userData.id}`, {
+      .get(`https://eatwell-back-end.onrender.com/stats/${userData.id}`, {
         headers: { "x-auth-token": userData.token },
       })
       .then((res) => {
