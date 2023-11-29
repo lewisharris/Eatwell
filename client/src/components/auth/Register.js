@@ -56,7 +56,7 @@ export default function Register() {
 
       //log new user in
       const loginResponse = await axios.post(
-        "https://eatwell-back-end.onrender.com/users/register",
+        "https://eatwell-back-end.onrender.com/users/login",
         {
           email,
           password,

@@ -97,7 +97,7 @@ export default function Login() {
             label="Password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
-            type="text"
+            type="password"
           />
 
           <Button type="submit" onClick={submitForm} text="Sign in">
